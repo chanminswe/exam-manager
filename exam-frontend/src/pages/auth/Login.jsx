@@ -2,8 +2,11 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-
   const navigate = useNavigate();
+
+  function handleSubmit() {
+    navigate("/exams");
+  }
 
   return (
     <div className="flex h-[90vh] justify-center items-center bg-gray-100">
@@ -20,7 +23,10 @@ const Login = () => {
 
         {/* Login Form Section */}
         <div className="w-1/2 bg-white p-8">
-          <form className="h-full flex flex-col justify-center">
+          <form
+            onSubmit={handleSubmit}
+            className="h-full flex flex-col justify-center"
+          >
             {/* Username Field */}
             <div className="mb-6">
               <label
@@ -64,7 +70,7 @@ const Login = () => {
               <button
                 type="button"
                 className="w-24 py-2 text-blue-500 border border-blue-500 rounded-md font-semibold hover:bg-blue-500 hover:text-white transition duration-200"
-                onClick={() => navigate('/register')}
+                onClick={() => navigate("/register")}
               >
                 Register
               </button>
