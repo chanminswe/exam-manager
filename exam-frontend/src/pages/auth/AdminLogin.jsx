@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const Register = () => {
+const AdminLogin = () => {
   const navigate = useNavigate();
 
   return (
@@ -9,7 +9,7 @@ const Register = () => {
       <div className="flex flex-col w-[90%] max-w-lg mx-auto shadow-lg border border-gray-200 rounded-lg overflow-hidden bg-white p-10">
         {/* Title */}
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
-          Create an Account
+          Admin Login
         </h2>
 
         {/* Register Form */}
@@ -20,7 +20,7 @@ const Register = () => {
               className="block text-gray-700 text-sm font-semibold mb-2"
               htmlFor="username"
             >
-              Username
+              Admin Username
             </label>
             <input
               className="shadow border border-gray-300 rounded w-full py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -48,30 +48,13 @@ const Register = () => {
             />
           </div>
 
-          {/* Batch Number Field */}
-          <div>
-            <label
-              className="block text-gray-700 text-sm font-semibold mb-2"
-              htmlFor="batch"
-            >
-              Batch Number
-            </label>
-            <input
-              className="shadow border border-gray-300 rounded w-full py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-              type="number"
-              id="batch"
-              name="batch"
-              placeholder="Enter your batch number"
-            />
-          </div>
-
           {/* Register Button */}
           <button
             type="button"
             className="w-full py-3 mt-4 text-white bg-blue-500 rounded-md font-semibold hover:bg-blue-600 transition duration-200"
-            onClick={() => navigate('/')}
+            onClick={() => navigate("/")}
           >
-            Register
+            Admin Login
           </button>
         </form>
       </div>
@@ -79,4 +62,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default AdminLogin;
