@@ -9,7 +9,7 @@ const Login = () => {
   }
 
   return (
-    <div className="flex h-[90vh] justify-center items-center bg-gray-100">
+    <div className="flex h-[90vh] justify-center items-center ">
       <div className="flex w-[90%] max-w-3xl mx-auto shadow-lg border border-gray-200 rounded-lg overflow-hidden">
         {/* Welcome Section */}
         <div className="flex flex-col justify-center items-center w-1/2 bg-blue-50 p-8">
