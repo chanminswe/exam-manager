@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 const Exam = () => {
   const { examName } = useParams();
+  const [selectedAnswer, setSelectedAnswer] = useState({});
   const [loading, setLoading] = useState(false);
 
   const examData = [
@@ -54,6 +55,16 @@ const Exam = () => {
     },
   ];
 
+  //this is for handling chose answer and the change in the answer if the user were to change it
+  function handleAnswerSelection(question, chosenAnswer) {
+    setSelectedAnswer((prevSelectedAnswer) => ({
+      ...prevSelectedAnswer,
+      [question]: chosenAnswer,
+    }));
+  }
+
+  function submitExam() {}
+
   return (
     <div className="flex w-full bg-gray-100 font-semibold ">
       {loading ? (
@@ -64,15 +75,28 @@ const Exam = () => {
             {examData.map((value, index) => (
               <div key={value.question} className="w-full my-5 py-3">
                 <p>{value.question}</p>
-                {value.answers.map((answers, index) => (
-                  <>
-                    <input type="radio" />
-                    <label>{answers}</label>
+                {value.answers.map((answers, answersIndex) => (
+                  <div key={answersIndex}>
+                    <input
+                      type="radio"
+                      name={value.question}
+                      checked={selectedAnswer[value.question] === answers}
+                      className="m-1 py-3"
+                      onChange={() =>
+                        handleAnswerSelection(value.question, answers)
+                      }
+                    />
+                    <label className="px-2 m-1">{answers}</label>
                     <br />
-                  </>
+                  </div>
                 ))}
               </div>
             ))}
+          </div>
+          <div className="flex justify-end">
+            <button className="border rounded-md px-3 py-2 bg-teal-600 hover:scale-95 ">
+              Submit
+            </button>
           </div>
         </div>
       )}
