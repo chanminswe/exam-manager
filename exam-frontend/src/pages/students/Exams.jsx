@@ -23,8 +23,8 @@ const Exams = () => {
     },
   ];
 
-  function handleView() {
-    navigate("/warning");
+  function handleView(exam) {
+    navigate(`/warning/${encodeURIComponent(exam.examName)}`);
   }
 
   return (
@@ -42,7 +42,7 @@ const Exams = () => {
             <div className="flex justify-between">
               <p className="text-sm text-gray-600">{value.createdBy}</p>
               <button
-                onClick={handleView}
+                onClick={() => handleView(value)}
                 className="border border-teal-400 rounded-md bg-teal-500 text-sm py-2 px-3 font-semibold transform transition-transform duration-200 hover:scale-105"
               >
                 View

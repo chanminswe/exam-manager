@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <div
       className="flex justify-between items-center
-     h-[10vh] bg-gray-300"
+     h-[10vh] bg-gray-200"
     >
       <div className="ml-5 w-30 h-24">
         <Link to="/">

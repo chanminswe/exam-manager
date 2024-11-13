@@ -1,13 +1,17 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
 const Warning = () => {
-  const exam = "dummy exam";
+  const { examName } = useParams();
 
   return (
     <div className="flex w-screen h-[90vh] items-center justify-center">
       <div className="flex flex-col justify-around border rounded-md h-32 px-5 py-2">
         <div className="mb-5">
-          Warning ! Are you sure you want to answer {exam} !
+          <p>
+            Are you sure you want to answer - {" "}
+            <span className="text-blue-500 font-semibold">{examName}</span>
+          </p>
         </div>
         <div className="flex justify-between px-5 ">
           <button className="border px-3 py-2 rounded-md bg-teal-600 transition transform hover:scale-95">
