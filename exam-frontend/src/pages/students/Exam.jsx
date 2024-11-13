@@ -55,12 +55,19 @@ const Exam = () => {
   ];
 
   return (
-    <div className="text-center font-semibold mx-auto">
+    <div className="flex h-[90vh] w-full bg-gray-100 font-semibold ">
       {loading ? (
         <div>Please wait while we are fetching exam data ! </div>
       ) : (
-        <div className="mt-10">
-          <p> {examName} started !</p>
+        <div className="border shadow-md w-[100%] m-5 p-10">
+          <div className="flex flex-wrap justify-center items-center">
+            {examData.map((value, index) => (
+              <div key={value.question} className="w-full my-5 py-3">
+                <p>{value.question}</p>
+
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
