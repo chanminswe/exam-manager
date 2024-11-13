@@ -55,7 +55,7 @@ const Exam = () => {
   ];
 
   return (
-    <div className="flex h-[90vh] w-full bg-gray-100 font-semibold ">
+    <div className="flex w-full bg-gray-100 font-semibold ">
       {loading ? (
         <div>Please wait while we are fetching exam data ! </div>
       ) : (
@@ -64,7 +64,13 @@ const Exam = () => {
             {examData.map((value, index) => (
               <div key={value.question} className="w-full my-5 py-3">
                 <p>{value.question}</p>
-
+                {value.answers.map((answers, index) => (
+                  <>
+                    <input type="radio" />
+                    <label>{answers}</label>
+                    <br />
+                  </>
+                ))}
               </div>
             ))}
           </div>
