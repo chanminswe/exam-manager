@@ -6,6 +6,7 @@ const Exam = () => {
   const { examName } = useParams();
   const [selectedAnswer, setSelectedAnswer] = useState({});
   const [loading, setLoading] = useState(false);
+  const [isfullscreen, setIsFullScreen] = useState(false);
 
   const examData = [
     {
@@ -59,13 +60,12 @@ const Exam = () => {
   useEffect(() => {
     if (fscreen.fullscreenEnabled) {
       fscreen.requestFullscreen(document.documentElement);
+      setIsFullScreen(true);
     }
 
     const handleFullscreenChange = () => {
       if (!fscreen.fullscreenElement) {
-        alert("You need to stay in fullscreen mode during the exam.");
-        //  Request fullscreen again if user exits
-        fscreen.requestFullscreen(document.documentElement);
+        setIsFullScreen(false);
       }
     };
 
@@ -86,6 +86,10 @@ const Exam = () => {
     }));
   }
 
+  function reEnterFullScreen() {
+    fscreen.requestFullscreen(document.documentElement);
+    setIsFullScreen(true);
+  }
   //event occured when you submit exam
   function submitExam() {
     console.log(selectedAnswer);
@@ -95,7 +99,7 @@ const Exam = () => {
     <div className="flex w-full bg-gray-100 font-semibold ">
       {loading ? (
         <div>Please wait while we are fetching exam data ! </div>
-      ) : (
+      ) : isfullscreen ? (
         <div className="border shadow-md w-[100%] m-5 p-10">
           <p className="font-semibold text-2xl text-green-600">{examName}</p>
           <div className="flex flex-wrap justify-center items-center">
@@ -126,6 +130,20 @@ const Exam = () => {
               className="border rounded-md px-3 py-2 bg-teal-600 hover:scale-95 "
             >
               Submit
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className="flex flex-wrap flex-col w-full h-[90vh] items-center justify-center">
+          <div className="my-5">
+            <p>Please Enter Full Screen to continue answering the exam</p>
+          </div>
+          <div className="my-5">
+            <button
+              className="border py-2 px-3 rounded-md bg-red-500 font-semi bold text-sm hover:scale-90"
+              onClick={reEnterFullScreen}
+            >
+              Re-Enter FullScreen
             </button>
           </div>
         </div>

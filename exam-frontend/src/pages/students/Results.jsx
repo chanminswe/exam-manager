@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Results = () => {
+  const [resultsLoading, setResultsLoading] = useState(false);
+
   return <div>Results</div>;
 };
 
