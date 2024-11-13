@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import fscreen from "fscreen";
 
 const Exam = () => {
   const { examName } = useParams();
@@ -55,7 +56,29 @@ const Exam = () => {
     },
   ];
 
-  //this is for handling chose answer and the change in the answer if the user were to change it
+  useEffect(() => {
+    if (fscreen.fullscreenEnabled) {
+      fscreen.requestFullscreen(document.documentElement);
+    }
+
+    const handleFullscreenChange = () => {
+      if (!fscreen.fullscreenElement) {
+        alert("You need to stay in fullscreen mode during the exam.");
+        //  Request fullscreen again if user exits
+        fscreen.requestFullscreen(document.documentElement);
+      }
+    };
+
+    fscreen.addEventListener("fullscreenchange", handleFullscreenChange);
+
+    // Clean up event listener on component unmount
+    return () => {
+      fscreen.removeEventListener("fullscreenchange", handleFullscreenChange);
+    };
+  }, []);
+
+  //this is for handling chose answer and the change in the answer if
+  //the user were to change it
   function handleAnswerSelection(question, chosenAnswer) {
     setSelectedAnswer((prevSelectedAnswer) => ({
       ...prevSelectedAnswer,
@@ -63,7 +86,10 @@ const Exam = () => {
     }));
   }
 
-  function submitExam() {}
+  //event occured when you submit exam
+  function submitExam() {
+    console.log(selectedAnswer);
+  }
 
   return (
     <div className="flex w-full bg-gray-100 font-semibold ">
@@ -71,6 +97,7 @@ const Exam = () => {
         <div>Please wait while we are fetching exam data ! </div>
       ) : (
         <div className="border shadow-md w-[100%] m-5 p-10">
+          <p className="font-semibold text-2xl text-green-600">{examName}</p>
           <div className="flex flex-wrap justify-center items-center">
             {examData.map((value, index) => (
               <div key={value.question} className="w-full my-5 py-3">
@@ -94,7 +121,10 @@ const Exam = () => {
             ))}
           </div>
           <div className="flex justify-end">
-            <button className="border rounded-md px-3 py-2 bg-teal-600 hover:scale-95 ">
+            <button
+              onClick={submitExam}
+              className="border rounded-md px-3 py-2 bg-teal-600 hover:scale-95 "
+            >
               Submit
             </button>
           </div>
