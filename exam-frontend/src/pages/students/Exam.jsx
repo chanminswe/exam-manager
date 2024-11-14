@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import fscreen from "fscreen";
 
 const Exam = () => {
@@ -7,6 +7,7 @@ const Exam = () => {
   const [selectedAnswer, setSelectedAnswer] = useState({});
   const [loading, setLoading] = useState(false);
   const [isfullscreen, setIsFullScreen] = useState(false);
+  const navigate = useNavigate();
 
   const examData = [
     {
@@ -93,6 +94,7 @@ const Exam = () => {
   //event occured when you submit exam
   function submitExam() {
     console.log(selectedAnswer);
+    navigate("/results");
   }
 
   return (
