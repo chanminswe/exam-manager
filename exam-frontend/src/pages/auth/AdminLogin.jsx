@@ -52,7 +52,7 @@ const AdminLogin = () => {
           <button
             type="button"
             className="w-full py-3 mt-4 text-white bg-blue-500 rounded-md font-semibold hover:bg-blue-600 transition duration-200"
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/viewExams")}
           >
             Admin Login
           </button>

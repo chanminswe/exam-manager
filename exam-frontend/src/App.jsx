@@ -8,6 +8,7 @@ import Warning from "./pages/students/Warning.jsx";
 import Exams from "./pages/students/Exams.Jsx";
 import Exam from "./pages/students/Exam.jsx";
 import Results from "./pages/students/Results.jsx";
+import ViewExams from "./pages/management/ViewExams.jsx";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
 
         {/* For admins need to add auth later */}
         <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/viewExams" element={<ViewExams />} />
         {/* For admins need to add auth later */}
 
         {/* For students need to add another auth later */}
