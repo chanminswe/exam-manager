@@ -1,10 +1,10 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-const CreateQuestion = () => {
+const ViewQuestion = () => {
   const { examName } = useParams();
 
-  return <div>CreateQuestion {examName}</div>;
+  return <div> View Questions : {examName} </div>;
 };
 
-export default CreateQuestion;
+export default ViewQuestion;

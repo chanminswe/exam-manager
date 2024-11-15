@@ -95,7 +95,7 @@ const ViewExams = () => {
                       className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                       onClick={() =>
                         navigate(
-                          `/createQuestions/${encodeURIComponent(
+                          `/createQuestion/${encodeURIComponent(
                             value.examName
                           )}`
                         )
