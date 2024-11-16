@@ -41,7 +41,7 @@ const Exams = () => {
             <p className="text-lg items-center font-semibold text-gray-800">
               {value.examName}
             </p>
-            <div className="flex justify-between">
+            <div className="flex items-center justify-between">
               <p className="text-sm text-gray-600">{value.createdBy}</p>
               <button
                 onClick={() => handleView(value)}
