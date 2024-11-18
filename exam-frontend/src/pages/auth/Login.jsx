@@ -69,7 +69,7 @@ const Login = () => {
               </button>
               <button
                 type="button"
-                className="w-24 py-2 text-blue-500 border border-blue-500 rounded-md font-semibold hover:bg-blue-500 hover:text-white transition duration-200"
+                className="w-24 py-2 text-green-900 border border-green-500 rounded-md font-semibold hover:bg-teal-500 hover:text-white transition duration-200"
                 onClick={() => navigate("/register")}
               >
                 Register
