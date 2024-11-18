@@ -3,7 +3,7 @@ const router = express.Router();
 
 //POST Method
 //for registering user
-router.post("/register", );
+router.post("/register", require("../../auth/auth-user/registerController"));
 
 //POST METHOD
 //for logging in user

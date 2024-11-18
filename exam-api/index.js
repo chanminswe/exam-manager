@@ -11,7 +11,10 @@ app.get("/", (req, res) => {
   res.send("The code is running ig!");
 });
 
-//routes for user authentication 
+//to get data from frontend
+app.use(express.json());
+
+//routes for user authentication
 app.use("/auth/user", require("./routes/routes-user/userAuthRoutes"));
 
 app.listen(PORT, () => {
