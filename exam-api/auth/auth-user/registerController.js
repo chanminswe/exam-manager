@@ -17,20 +17,23 @@ const registerUser = async (req, res) => {
     }
 
     //crypting password
-    const hashPassword = bcrypt.hash(password, 10);
+    const hashPassword = await bcrypt.hash(password, 10);
     const createAccount = await Users.create({
       username,
       password: hashPassword,
       batchNumber,
     });
 
+    //account creating process to see if it worked
     if (!createAccount) {
       return res
         .status(400)
         .json({ message: "error occured while creating account" });
     }
 
-    return res.status(201).json({ message: "registered user sucessfully!" });
+    return res
+      .status(201)
+      .json({ message: `registered user ${username} sucessfully!` });
   } catch (error) {
     console.log("Error Occured at registerUser", error.message);
     return res.status(500).json({ message: "Internal Server Error" });
