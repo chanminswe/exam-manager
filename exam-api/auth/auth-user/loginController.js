@@ -6,6 +6,7 @@ const loginUser = async (req, res) => {
   try {
     //to check if user input is valid
     const { username, password } = req.body;
+    console.log(req.body);
     if (!username || !password) {
       return res.status(400).json({ message: "Invalid Credentials" });
     }
@@ -20,6 +21,7 @@ const loginUser = async (req, res) => {
         .json({ message: "User Not Found or Incorret Password" });
     }
 
+    //signing token after successful login
     const token = jwt.sign(
       { _id: findUser._id, username: findUser._username },
       process.env.JWT_SECRET,
@@ -27,7 +29,7 @@ const loginUser = async (req, res) => {
     );
 
     //message if login sucessful
-    return res.status(201).json(token);
+    return res.status(201).json({message : "Logged In Successful" , token : token});
   } catch (error) {
     console.log("Error Occured at loginUser", error.message);
     return res.status(500).json({ message: "Internal Server Error" });

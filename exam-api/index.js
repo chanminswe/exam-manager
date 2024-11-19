@@ -1,11 +1,17 @@
 const express = require("express");
 const dbConnection = require("./db/dbConnection");
 const dotenv = require("dotenv").config();
+const cors = require("cors");
 
 const app = express();
 
 //PORT number
 const PORT = process.env.PORT || 4040;
+
+//to allow resource sharing
+app.use(cors({
+  
+}));
 
 //to see if code run
 app.get("/", (req, res) => {
