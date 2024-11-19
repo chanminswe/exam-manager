@@ -1,4 +1,5 @@
 const express = require("express");
+const dbConnection = require("./db/dbConnection");
 const dotenv = require("dotenv").config();
 
 const app = express();
@@ -19,4 +20,5 @@ app.use("/auth/user", require("./routes/routes-user/userAuthRoutes"));
 
 app.listen(PORT, () => {
   console.log(`PORT ${PORT} has started!`);
+  dbConnection();
 });
