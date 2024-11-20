@@ -7,7 +7,7 @@ const loginUser = async (req, res) => {
     //to check if user input is valid
     const { username, password } = req.body;
     console.log(req.body);
-    
+
     if (!username || !password) {
       return res.status(400).json({ message: "Invalid Credentials" });
     }

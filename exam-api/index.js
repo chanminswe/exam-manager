@@ -9,9 +9,12 @@ const app = express();
 const PORT = process.env.PORT || 4040;
 
 //to allow resource sharing
-app.use(cors({
-  
-}));
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 //to see if code run
 app.get("/", (req, res) => {
