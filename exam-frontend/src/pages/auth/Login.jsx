@@ -4,29 +4,23 @@ import axios from "axios";
 
 const Login = () => {
   const [username, setUsername] = useState("");
-  const [dummyUsername, setDummyUsername] = useState("");
-
   const [password, setPassword] = useState("");
-  const [dummyPassword, setDummyPassword] = useState("");
 
   const navigate = useNavigate();
 
   async function handleSubmit(event) {
     event.preventDefault();
-    setUsername(dummyUsername);
-    setPassword(dummyPassword);
-    console.log(username);
-    console.log(password);
-    const res = await axios.post("http://localhost:4040/auth/user/login", {
-      username,
-      password,
-    });
-
-    alert(res.data.message);
-
-    if (res.data.message) {
-      navigate("/exams");
-    }
+    await axios
+      .post("http://localhost:4040/auth/user/login", {
+        username,
+        password,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log("Error Occured", error.message);
+      });
   }
 
   return (
@@ -54,10 +48,10 @@ const Login = () => {
                 className="block text-gray-700 text-sm font-semibold mb-2"
                 htmlFor="username"
               >
-                Username {dummyUsername}
+                Username
               </label>
               <input
-                onChange={(event) => setDummyUsername(event.target.value)}
+                onChange={(event) => setUsername(event.target.value)}
                 className="shadow border border-gray-300 rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
                 type="text"
                 id="username"
@@ -71,10 +65,10 @@ const Login = () => {
                 className="block text-gray-700 text-sm font-semibold mb-2"
                 htmlFor="password"
               >
-                Password {dummyPassword}
+                Password
               </label>
               <input
-                onChange={(event) => setDummyPassword(event.target.value)}
+                onChange={(event) => setPassword(event.target.value)}
                 className="shadow border border-gray-300 rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
                 type="password"
                 id="password"

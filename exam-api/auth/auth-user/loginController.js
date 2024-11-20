@@ -7,6 +7,7 @@ const loginUser = async (req, res) => {
     //to check if user input is valid
     const { username, password } = req.body;
     console.log(req.body);
+    
     if (!username || !password) {
       return res.status(400).json({ message: "Invalid Credentials" });
     }
@@ -29,7 +30,9 @@ const loginUser = async (req, res) => {
     );
 
     //message if login sucessful
-    return res.status(201).json({message : "Logged In Successful" , token : token});
+    return res
+      .status(201)
+      .json({ message: "Logged In Successful", token: token });
   } catch (error) {
     console.log("Error Occured at loginUser", error.message);
     return res.status(500).json({ message: "Internal Server Error" });
