@@ -11,11 +11,17 @@ const Login = () => {
   async function handleSubmit(event) {
     event.preventDefault();
     await axios
-      .post("http://localhost:4040/auth/user/login", {
-        username,
-        password,
-      })
+      .post(
+        "http://localhost:4040/auth/user/login",
+        {
+          username,
+          password,
+        },
+        { withCredentials: true }
+      )
       .then((response) => {
+        alert("Logged In Successful!");
+        navigate("/exams");
         console.log(response);
       })
       .catch((error) => {

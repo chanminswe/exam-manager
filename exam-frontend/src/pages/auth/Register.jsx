@@ -11,11 +11,17 @@ const Register = () => {
   async function handleRegister(event) {
     event.preventDefault();
     await axios
-      .post("http://localhost:4040/auth/user/register", {
-        username,
-        password,
-        batchNumber,
-      })
+      .post(
+        "http://localhost:4040/auth/user/register",
+        {
+          username,
+          password,
+          batchNumber,
+        },
+        {
+          withCredentials: true,
+        }
+      )
       .then((resp) => {
         alert(`Registered ${username} sucessfully!`);
         navigate("/");

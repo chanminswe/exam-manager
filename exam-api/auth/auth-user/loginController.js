@@ -29,10 +29,14 @@ const loginUser = async (req, res) => {
       { expiresIn: "1d" }
     );
 
+    //sending cookie for successful log in so the user can spend in broswer
+    res.cookie("authToken", token, {
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+
     //message if login sucessful
-    return res
-      .status(201)
-      .json({ message: "Logged In Successful", token: token });
+    return res.status(201).json({ message: "Logged In Successful" });
   } catch (error) {
     console.log("Error Occured at loginUser", error.message);
     return res.status(500).json({ message: "Internal Server Error" });

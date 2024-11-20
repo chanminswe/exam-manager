@@ -2,11 +2,15 @@ const express = require("express");
 const dbConnection = require("./db/dbConnection");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
 //PORT number
 const PORT = process.env.PORT || 4040;
+
+//to save cookie Browser
+app.use(cookieParser());
 
 //to allow resource sharing
 app.use(
