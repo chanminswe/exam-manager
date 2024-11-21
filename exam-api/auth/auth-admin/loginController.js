@@ -2,49 +2,50 @@ const jwt = require("jsonwebtoken");
 const Teachers = require("../../models/Teachers");
 const bcrypt = require("bcrypt");
 
-/* 
-This page is basically for admin login , I use json web token for valid login and 
-return cookie for sucessful login
-*/
 const loginAdmin = async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    //to check if credentials are empty
+    console.log(req.body);
+
+    // Validate input
     if (!username || !password) {
-      return res
-        .status(400)
-        .json({ message: "All credentials are necessary!" });
+      return res.status(400).json({ message: "All credentials are necessary!" });
     }
 
-    //to avoid wrong password and username
+    // Find teacher by username
     const findUsername = await Teachers.findOne({ username });
-
-    if (
-      !findUsername ||
-      !(await bcrypt.compare(password, findUsername.password))
-    ) {
+    if (!findUsername) {
       return res.status(400).json({ message: "Incorrect Credentials" });
     }
 
+    // Compare hashed password
+    const isPasswordValid = await bcrypt.compare(password, findUsername.password);
+    if (!isPasswordValid) {
+      return res.status(400).json({ message: "Incorrect Credentials" });
+    }
+
+    // Generate JWT
     const token = jwt.sign(
       {
         _id: findUsername._id,
         username: findUsername.username,
       },
-      process.env.SECRET,
+      process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
 
-    //sending admins cookies for successful login :0
+    // Send cookie
     res.cookie("authAdminToken", token, {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
     });
 
-    return res.status.json({ message: "Admin Login Successful!" });
+    return res.status(200).json({ message: "Admin Login Successful!" });
   } catch (error) {
-    console.log("Error Occured At LoginAdmin", error.message);
+    console.error("Error Occurred at LoginAdmin:", error);
     return res.status(500).json({ message: "Internal Server Error!" });
   }
 };

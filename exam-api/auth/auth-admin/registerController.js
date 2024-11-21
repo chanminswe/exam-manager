@@ -5,6 +5,8 @@ const registerAdmin = async (req, res) => {
   try {
     const { username, password } = req.body;
 
+    console.log(req.body);
+
     //to avoid empty credentials
     if (!username || !password) {
       return res.status(401).json({ message: "all credentials are required!" });
