@@ -28,6 +28,7 @@ const App = () => {
         {/* For admins need to add auth later */}
 
         {/* For students need to add another auth later */}
+        
         <Route path="/exams" element={<Exams />} />
         <Route path="/warning/:examName" element={<Warning />} />
         <Route path="/exam/:examName" element={<Exam />} />

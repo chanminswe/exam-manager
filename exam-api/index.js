@@ -2,7 +2,7 @@ const express = require("express");
 const dbConnection = require("./db/dbConnection");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
-const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser");
 
 const app = express();
 
@@ -30,6 +30,9 @@ app.use(express.json());
 
 //routes for user authentication
 app.use("/auth/user", require("./routes/routes-user/userAuthRoutes"));
+
+//routes for admin authentication
+app.use("/auth/admin", require("./routes/routes-teacher/adminAuthRoutes"));
 
 app.listen(PORT, () => {
   console.log(`PORT ${PORT} has started!`);
