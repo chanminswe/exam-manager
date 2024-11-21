@@ -36,6 +36,7 @@ const loginAdmin = async (req, res) => {
       { expiresIn: "1d" }
     );
 
+    //sending admins cookies for successful login :0
     res.cookie("authAdminToken", token, {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
