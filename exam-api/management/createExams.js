@@ -16,7 +16,8 @@ const createExams = async (req, res) => {
         .json({ message: "Exam Name cannot be duplicated!" });
     }
 
-    const createExam = await Exams.createExam({
+
+    const createExam = await Exams.create({
       examName,
       createdBy,
     });
