@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useContext, useEffect } from "react";
+import { UserContext } from "../context/UserContextProvider";
+import { useNavigate } from "react-router-dom";
 
 const UserProtectedRoutes = () => {
-  return (
-    <div>UserProtectedRoutes</div>
-  )
-}
+  const { studentUsername } = useContext(UserContext);
+  const navigate = useNavigate();
 
-export default UserProtectedRoutes
+  useEffect(() => {
+    if (studentUsername === null) {
+      navigate("/", { replace: "true" });
+    }
+  }, [studentUsername, navigate]);
+
+  return null;
+};
+
+export default UserProtectedRoutes;
