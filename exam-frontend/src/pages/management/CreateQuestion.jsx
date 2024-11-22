@@ -11,7 +11,6 @@ const CreateQuestion = () => {
         <h2 className="text-xl font-bold text-center mb-6 text-gray-800">
           Create a Question for "{examName}"
         </h2>
-
         {/* Question Input */}
         <div className="mb-5">
           <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -22,7 +21,6 @@ const CreateQuestion = () => {
             placeholder="Enter your question here"
           />
         </div>
-
         {/* Options Inputs */}
         <div className="mb-5">
           <label className="block text-sm font-medium text-gray-700 mb-2">
