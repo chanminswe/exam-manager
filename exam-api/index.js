@@ -31,7 +31,7 @@ app.use(express.json());
 //routes for user authentication
 app.use("/auth/user", require("./routes/routes-user/userAuthRoutes"));
 
-//routes for admin authentication
+// routes for admin authentication
 app.use("/auth/admin", require("./routes/routes-teacher/adminAuthRoutes"));
 
 app.listen(PORT, () => {

@@ -32,7 +32,7 @@ const loginAdmin = async (req, res) => {
         _id: findUsername._id,
         username: findUsername.username,
       },
-      process.env.SECRET,
+      process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
 
@@ -42,7 +42,7 @@ const loginAdmin = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000,
     });
 
-    return res.status.json({ message: "Admin Login Successful!" });
+    return res.status(200).json({ message: "Admin Login Successful!"});
   } catch (error) {
     console.log("Error Occured At LoginAdmin", error.message);
     return res.status(500).json({ message: "Internal Server Error!" });
