@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const Teachers = require("../../models/Teachers");
+const Teachers = require("../../models/roles/Teachers");
 const bcrypt = require("bcrypt");
 
 /* 
@@ -42,7 +42,7 @@ const loginAdmin = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000,
     });
 
-    return res.status(200).json({ message: "Admin Login Successful!"});
+    return res.status(200).json({ message: "Admin Login Successful!" });
   } catch (error) {
     console.log("Error Occured At LoginAdmin", error.message);
     return res.status(500).json({ message: "Internal Server Error!" });

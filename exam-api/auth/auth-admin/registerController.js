@@ -1,4 +1,4 @@
-const Teachers = require("../../models/Teachers");
+const Teachers = require("../../models/roles/Teachers");
 const bcrypt = require("bcrypt");
 
 const registerAdmin = async (req, res) => {
