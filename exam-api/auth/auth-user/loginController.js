@@ -25,12 +25,12 @@ const loginUser = async (req, res) => {
     //signing token after successful login
     const token = jwt.sign(
       { _id: findUser._id, username: findUser._username },
-      process.env.JWT_SECRET,
+      process.env.JWT_SECRET_USER,
       { expiresIn: "1d" }
     );
 
     //sending cookie for successful log in so the user can spend in broswer
-    res.cookie("authToken", token, {
+    res.cookie("authUserToken", token, {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
     });

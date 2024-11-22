@@ -32,7 +32,7 @@ const loginAdmin = async (req, res) => {
         _id: findUsername._id,
         username: findUsername.username,
       },
-      process.env.JWT_SECRET,
+      process.env.JWT_SECRET_ADMIN,
       { expiresIn: "1d" }
     );
 
