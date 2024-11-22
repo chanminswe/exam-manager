@@ -15,8 +15,7 @@ const adminVerify = (req, res, next) => {
     return res.status(400).json({ message: "Cannot verify or expired cookie" });
   }
 
-  req.username = decoded;
-
+  req.user = decoded;
   next();
 };
 
