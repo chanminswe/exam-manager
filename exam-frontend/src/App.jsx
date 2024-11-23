@@ -30,7 +30,7 @@ const App = () => {
             {/* For admins need to add auth later */}
             <Route path="/admin" element={<AdminLogin />} />
 
-            <Route element={<AdminProtectedRoutes />}>
+            {/* <Route element={<AdminProtectedRoutes />}> */}
               <Route path="/viewExams" element={<ViewExams />} />
               <Route
                 path="/createQuestion/:examName"
@@ -40,7 +40,7 @@ const App = () => {
                 path="/viewQuestions/:examName"
                 element={<ViewQuestion />}
               />
-            </Route>
+            {/* </Route> */}
             {/* For admins need to add auth later */}
 
             <Route element={<UserProtectedRoutes />}>

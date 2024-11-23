@@ -10,6 +10,8 @@ const loginAdmin = async (req, res) => {
   try {
     const { username, password } = req.body;
 
+    console.log(req.body);
+
     //to check if credentials are empty
     if (!username || !password) {
       return res

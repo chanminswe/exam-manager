@@ -46,7 +46,7 @@ const ViewExams = () => {
         Every Created Exams
       </h2>
 
-      <div className="grid grid-cols-4 gap-6 w-full max-w-7xl my-6">
+      <div className="grid grid-cols-4 gap-6 w-full max-w-7xl my-6 ">
         {info.map((value, index) => (
           <div
             key={index}
