@@ -2,7 +2,11 @@ const Exams = require("../models/exams/Exams");
 
 const createExams = async (req, res) => {
   try {
-    const { examName, createdBy } = req.body;
+    const { examName } = req.body;
+
+    const { username } = req.user;
+
+    console.log(req.body, req.user);
 
     if (!examName) {
       return res.status(400).json({ message: "Exam name is necessary!" });
@@ -16,10 +20,9 @@ const createExams = async (req, res) => {
         .json({ message: "Exam Name cannot be duplicated!" });
     }
 
-
     const createExam = await Exams.create({
       examName,
-      createdBy,
+      createdBy : username,
     });
 
     if (!createExam) {

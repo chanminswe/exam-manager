@@ -7,9 +7,6 @@ const AdminLogin = () => {
   const [adminUsername, setAdminUsername] = useState(null);
   const [adminPassword, setAdminPassword] = useState(null);
 
-  const { setAdminUsername: setAdminUserNameContext } =
-    useContext(AdminContext);
-
   async function handleAdminLogin(event) {
     event.preventDefault();
     await axios
@@ -21,7 +18,6 @@ const AdminLogin = () => {
       .then((res) => {
         alert(res.data.message);
         console.log(res.data.message);
-        setAdminUserNameContext(adminUsername);
         navigate("/viewExams");
       })
       .catch((error) => {

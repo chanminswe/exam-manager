@@ -17,7 +17,6 @@ const adminVerify = (req, res, next) => {
     req.user = decoded;
     next();
   } catch (error) {
-    // Handle specific JWT errors
     if (error.name === "JsonWebTokenError") {
       return res
         .status(401)

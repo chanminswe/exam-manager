@@ -8,8 +8,7 @@ const ExamsSchema = mongoose.Schema(
       unique: true,
     },
     createdBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Teachers",
+      type: String,
       required: true,
     },
   },

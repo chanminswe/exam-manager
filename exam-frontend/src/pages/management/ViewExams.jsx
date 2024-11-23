@@ -1,9 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const ViewExams = () => {
   const navigate = useNavigate();
+  const [exams, setExams] = useState([]);
   const [openDropDown, setOpenDropDown] = useState(null);
+
+  useEffect(() => {
+    async function getExam() {
+      try {
+        const res = await axios.get(
+          "http://localhost:4040/auth/admin/viewExams",
+          { withCredentials: true }
+        );
+
+        setExams((prevExams) => [...prevExams, ...res.data.getExams]);
+      } catch (error) {
+        console.log("Error Occured ", error);
+      }
+    }
+
+    getExam();
+  }, []);
 
   const info = [
     {
@@ -46,8 +65,8 @@ const ViewExams = () => {
         Every Created Exams
       </h2>
 
-      <div className="grid grid-cols-4 gap-6 w-full max-w-7xl my-6 ">
-        {info.map((value, index) => (
+      <div className="grid grid-cols-3 gap-6 w-full max-w-7xl my-6 ">
+        {exams.map((value, index) => (
           <div
             key={index}
             className="relative h-36 w-full bg-white border border-gray-200 rounded-lg shadow-lg p-4 my-5 flex flex-col justify-between"
