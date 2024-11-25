@@ -2,7 +2,9 @@ const Questions = require("../models/exams/Questions");
 
 const createQuestion = async (req, res) => {
   try {
-    const { examId, question, answers, correctAnswer } = req.body;
+    const { examName , question, answers, correctAnswer } = req.body;
+
+    console.log(req.body);
 
     if ((!examName, !question, !answers, !correctAnswer)) {
       return res
@@ -11,7 +13,7 @@ const createQuestion = async (req, res) => {
     }
 
     const createQuestion = await Questions.create({
-      examId,
+      examName,
       question,
       answers,
       correctAnswer,
@@ -29,3 +31,5 @@ const createQuestion = async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+module.exports = createQuestion;

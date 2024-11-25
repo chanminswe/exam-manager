@@ -11,10 +11,13 @@ router.post("/login", adminLogin);
 
 router.post("/register", adminRegister);
 
+//to create Exam Name
 router.post("/createExam", adminVerify, createExam);
 
-// router.post("/crateQuestion", adminVerify, createQuesiton);
+//to create Exam Question
+router.post("/createQuestion", adminVerify, createQuesiton);
 
+//to view Exams as admin
 router.get("/viewExams", adminVerify, viewExams);
 
 module.exports = router;
