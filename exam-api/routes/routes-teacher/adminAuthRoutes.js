@@ -5,12 +5,15 @@ const adminRegister = require("../../auth/auth-admin/registerController");
 const createExam = require("../../management/createExams");
 const adminVerify = require("../../middleware/admin_verify");
 const viewExams = require("../../management/viewExams");
+const createQuesiton = require("../../management/createQuestion");
 
 router.post("/login", adminLogin);
 
 router.post("/register", adminRegister);
 
 router.post("/createExam", adminVerify, createExam);
+
+// router.post("/crateQuestion", adminVerify, createQuesiton);
 
 router.get("/viewExams", adminVerify, viewExams);
 
