@@ -1,38 +1,49 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const ViewQuestion = () => {
+  const [questions, setQuestions] = useState("");
   const { examName } = useParams();
 
   useEffect(() => {
-    async function getQuestions(){
-      const question = await axios.get('http://localhost:4040/get')
+    async function getQuestions() {
+      try {
+        const question = await axios.get(
+          "http://localhost:4040/viewQuestion",
+          { examName },
+          { withCredentials: true }
+        );
+      } catch (error) {
+        console.log("Error Occured At Get Questinos", error);
+      }
     }
-  })
 
-  const questions = [
-    {
-      id: 12323,
-      question: "What is React?",
-    },
-    {
-      id: 83492,
-      question: "How does useState work in React?",
-    },
-    {
-      id: 57481,
-      question: "What is the virtual DOM in React?",
-    },
-    {
-      id: 98342,
-      question: "What are React hooks and why are they used?",
-    },
-    {
-      id: 67520,
-      question: "Can you explain the concept of props in React?",
-    },
-  ];
+    getQuestions();
+  }, []);
+
+  // const questions = [
+  //   {
+  //     id: 12323,
+  //     question: "What is React?",
+  //   },
+  //   {
+  //     id: 83492,
+  //     question: "How does useState work in React?",
+  //   },
+  //   {
+  //     id: 57481,
+  //     question: "What is the virtual DOM in React?",
+  //   },
+  //   {
+  //     id: 98342,
+  //     question: "What are React hooks and why are they used?",
+  //   },
+  //   {
+  //     id: 67520,
+  //     question: "Can you explain the concept of props in React?",
+  //   },
+  // ];
 
   function handleDelete(id) {
     console.log(id, "deleted");

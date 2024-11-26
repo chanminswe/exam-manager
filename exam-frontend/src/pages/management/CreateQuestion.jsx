@@ -83,16 +83,6 @@ const CreateQuestion = () => {
             className="border border-gray-300 rounded-md p-2 mb-2 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none"
             placeholder={`Option 4}`}
           />
-
-          {/* {answers.map((answer, index) => (
-            <input
-              key={index}
-              value={answer}
-              onChange={(event) => updateAnswer(index, event.target.value)}
-              className="border border-gray-300 rounded-md p-2 mb-2 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              placeholder={`Option ${index + 1}`}
-            />
-          ))} */}
         </div>
 
         {/* Correct Option Input */}
