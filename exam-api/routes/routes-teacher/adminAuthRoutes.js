@@ -28,7 +28,7 @@ router.get("/viewExams", adminVerify, viewExams);
 
 //to view Questions as admin
 //with admin verification middleware
-router.get("/viewQuestions", adminVerify, viewQuestions);
+router.post("/viewQuestions", adminVerify, viewQuestions);
 
 //to delete question as admin
 //with admin verification middleware

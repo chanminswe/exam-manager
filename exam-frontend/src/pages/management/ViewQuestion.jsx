@@ -3,17 +3,19 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const ViewQuestion = () => {
-  const [questions, setQuestions] = useState("");
+  const [questions, setQuestions] = useState([]);
   const { examName } = useParams();
 
   useEffect(() => {
     async function getQuestions() {
       try {
-        const question = await axios.get(
-          "http://localhost:4040/viewQuestion",
+        const response = await axios.post(
+          "http://localhost:4040/auth/admin/viewQuestions",
           { examName },
           { withCredentials: true }
         );
+        console.log(response.data);
+        setQuestions(response.data);
       } catch (error) {
         console.log("Error Occured At Get Questinos", error);
       }

@@ -2,7 +2,8 @@ const Questions = require("../models/exams/Exams");
 
 const viewQuestions = async (req, res) => {
   try {
-    const examName = req.body;
+    const {examName} = req.body;
+    console.log(examName);
     const getQuestions = await Questions.find({ examName });
 
     if (!examName) {
