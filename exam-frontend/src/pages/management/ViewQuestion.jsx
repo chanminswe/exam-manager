@@ -1,8 +1,15 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const ViewQuestion = () => {
   const { examName } = useParams();
+
+  useEffect(() => {
+    async function getQuestions(){
+      const question = await axios.get('http://localhost:4040/get')
+    }
+  })
 
   const questions = [
     {

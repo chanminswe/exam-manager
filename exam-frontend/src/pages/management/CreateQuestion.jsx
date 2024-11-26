@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const CreateQuestion = () => {
-  
   const { examName } = useParams();
   const [question, setQuestion] = useState("");
   const [answers, setAnswers] = useState(["", "", "", ""]);
