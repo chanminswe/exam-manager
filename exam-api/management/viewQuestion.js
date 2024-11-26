@@ -3,7 +3,7 @@ const Questions = require("../models/exams/Exams");
 const viewQuestions = async (req, res) => {
   try {
     const examName = req.body;
-    const getQuestions = await Questions.find({examName});
+    const getQuestions = await Questions.find({ examName });
 
     if (!examName) {
       return res.status(400).json({
