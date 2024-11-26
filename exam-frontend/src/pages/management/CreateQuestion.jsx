@@ -3,14 +3,22 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const CreateQuestion = () => {
+  
   const { examName } = useParams();
   const [question, setQuestion] = useState("");
-  const [answers, setAnswers] = useState(["", "", "", ""]); // Default four options
+  const [answers, setAnswers] = useState(["", "", "", ""]);
+  const [answerOne, setAnswerOne] = useState("");
+  const [answerTwo, setAnswerTwo] = useState("");
+  const [answerThree, setAnswerThree] = useState("");
+  const [answerFour, setAnswerFour] = useState("");
   const [correctAnswer, setCorrectAnswer] = useState("");
 
   async function createQuestion(event) {
     event.preventDefault();
     try {
+      const batch = [answerOne, answerTwo, answerThree, answerFour];
+      setAnswers(batch);
+
       const resp = await axios.post(
         "http://localhost:4040/auth/admin/createQuestion",
         {
@@ -26,13 +34,6 @@ const CreateQuestion = () => {
       console.log("Error occurred:", error);
     }
   }
-
-  // Simplified: Update the answers array by overwriting at the correct index
-  const updateAnswer = (index, value) => {
-    const updated = [...answers];
-    updated[index] = value;
-    setAnswers(updated);
-  };
 
   return (
     <div className="flex justify-center w-full h-auto py-10">
@@ -63,7 +64,28 @@ const CreateQuestion = () => {
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Answers :
           </label>
-          {answers.map((answer, index) => (
+          <input
+            onChange={(event) => setAnswerOne(event.target.value)}
+            className="border border-gray-300 rounded-md p-2 mb-2 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            placeholder={`Option 1`}
+          />
+          <input
+            onChange={(event) => setAnswerTwo(event.target.value)}
+            className="border border-gray-300 rounded-md p-2 mb-2 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            placeholder={`Option 2`}
+          />
+          <input
+            onChange={(event) => setAnswerThree(event.target.value)}
+            className="border border-gray-300 rounded-md p-2 mb-2 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            placeholder={`Option 3`}
+          />
+          <input
+            onChange={(event) => setAnswerFour(event.target.value)}
+            className="border border-gray-300 rounded-md p-2 mb-2 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            placeholder={`Option 4}`}
+          />
+
+          {/* {answers.map((answer, index) => (
             <input
               key={index}
               value={answer}
@@ -71,7 +93,7 @@ const CreateQuestion = () => {
               className="border border-gray-300 rounded-md p-2 mb-2 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none"
               placeholder={`Option ${index + 1}`}
             />
-          ))}
+          ))} */}
         </div>
 
         {/* Correct Option Input */}
