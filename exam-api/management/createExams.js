@@ -6,7 +6,7 @@ const createExams = async (req, res) => {
 
     const { username } = req.user;
 
-    console.log(req.body, req.user);
+    console.log(req.body, username);
 
     if (!examName) {
       return res.status(400).json({ message: "Exam name is necessary!" });
@@ -22,7 +22,7 @@ const createExams = async (req, res) => {
 
     const createExam = await Exams.create({
       examName,
-      createdBy : username,
+      createdBy: username,
     });
 
     if (!createExam) {

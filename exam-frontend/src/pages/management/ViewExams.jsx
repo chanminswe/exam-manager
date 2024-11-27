@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import CreateExam from "./CreateExam";
 
 const ViewExams = () => {
   const navigate = useNavigate();
   const [exams, setExams] = useState([]);
+  const [count , setCount] = useState(0);
   const [openDropDown, setOpenDropDown] = useState(null);
 
   useEffect(() => {
@@ -15,14 +17,15 @@ const ViewExams = () => {
           { withCredentials: true }
         );
 
-        setExams((prevExams) => [...prevExams, ...res.data.getExams]);
+
+        setExams(res.data.getExams);
       } catch (error) {
         console.log("Error Occured ", error);
       }
     }
-
+    
     getExam();
-  }, []);
+  }, [count]);
 
   function handleView(exam) {
     navigate(`/warning/${encodeURIComponent(exam.examName)}`);
@@ -39,12 +42,13 @@ const ViewExams = () => {
   return (
     <div className="flex flex-col items-center mt-10">
       <h2 className="text-2xl font-bold text-gray-800 mb-6">
-        <button
+        <CreateExam count={setCount} />
+        {/* <button
           onClick={handleCreateExam}
           className="border rounded-lg px-2 py-2 bg-blue-400 text-sm font-semibold hover:scale-90"
         >
           Create Exam
-        </button>
+        </button> */}
       </h2>
 
       <div className="grid grid-cols-3 gap-6 w-full max-w-7xl my-6 ">

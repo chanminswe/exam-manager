@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const CreateExam = () => {
-  async function handleCreateExam() {
-    // const res = await axios.post('http://localhost:4040/auth/admin/createExam' , {createdBy , examName} , {withCredentials : true} );
+const CreateExam = ({ count }) => {
+  const [examName, setExamName] = useState("");
+  async function handleCreateExam(event) {
+    event.preventDefault();
+    try {
+      const res = await axios.post(
+        "http://localhost:4040/auth/admin/createExam",
+        { examName },
+        { withCredentials: true }
+      );
+      setExamName("");
+      count(count + 1);
+      toast.success("Exam Created Successfully");
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -15,8 +30,9 @@ const CreateExam = () => {
               Exam Name :{" "}
             </label>
             <input
+              onChange={(event) => setExamName(event.target.value)}
               placeholder="Exam Name"
-              className="w-[80%] border-2 rounded-lg  border-green-600 shadow-sm p-1"
+              className="w-[80%] border-2 rounded-lg  border-green-600 shadow-sm p-1 text-sm"
             />
           </div>
           <div className="flex flex-wrap justify-center mt-5">

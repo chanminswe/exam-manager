@@ -30,7 +30,6 @@ const App = () => {
 
         {/* <Route element={<AdminProtectedRoutes />}> */}
         <Route path="/viewExams" element={<ViewExams />} />
-        <Route path="/createExam" element={<CreateExam />} />
         <Route path="/createQuestion/:examName" element={<CreateQuestion />} />
         <Route path="/viewQuestions/:examName" element={<ViewQuestion />} />
         {/* </Route> */}
