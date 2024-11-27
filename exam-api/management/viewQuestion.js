@@ -1,16 +1,17 @@
-const Questions = require("../models/exams/Exams");
+const Questions = require("../models/exams/Questions");
 
 const viewQuestions = async (req, res) => {
   try {
-    const {examName} = req.body;
-    console.log(examName);
-    const getQuestions = await Questions.find({ examName });
+    const { examName } = req.body;
 
     if (!examName) {
       return res.status(400).json({
         message: "Couldn't get exam name",
       });
     }
+
+    const getQuestions = await Questions.find({ examName });
+    console.log("Questions retrieved:", getQuestions);
 
     if (!getQuestions) {
       return res.status(400).json({
