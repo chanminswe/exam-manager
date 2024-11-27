@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import CreateExam from "./CreateExam";
+import { toast } from "react-toastify";
 
 const ViewExams = () => {
   const navigate = useNavigate();
   const [exams, setExams] = useState([]);
-  const [count , setCount] = useState(0);
+  const [count, setCount] = useState(0);
   const [openDropDown, setOpenDropDown] = useState(null);
 
   useEffect(() => {
@@ -17,26 +18,36 @@ const ViewExams = () => {
           { withCredentials: true }
         );
 
-
         setExams(res.data.getExams);
       } catch (error) {
         console.log("Error Occured ", error);
       }
     }
-    
+
     getExam();
   }, [count]);
 
-  function handleView(exam) {
-    navigate(`/warning/${encodeURIComponent(exam.examName)}`);
+  // function handleView(exam) {
+  //   navigate(`/warning/${encodeURIComponent(exam.examName)}`);
+  // }
+
+  async function handleDelete(examName) {
+    try {
+      const deleteExam = await axios.post(
+        "http://localhost:4040/auth/admin/deleteExam",
+        { examName },
+        { withCredentials: true }
+      );
+      toast.success("Exam deleted Successfully !");
+      setCount(count + 1);
+      console.log(deleteExam);
+    } catch (error) {
+      console.log("Error Occured ", error);
+    }
   }
 
   function handleDropDown(index) {
     setOpenDropDown(openDropDown === index ? null : index);
-  }
-
-  function handleCreateExam() {
-    navigate("/createExam");
   }
 
   return (
@@ -107,6 +118,18 @@ const ViewExams = () => {
                       }
                     >
                       Create Questions
+                    </li>
+                    <li
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => handleDelete(value.examName)}
+                    >
+                      Delete Exam
+                    </li>
+                    <li
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => setOpenDropDown(null)}
+                    >
+                      Cancel
                     </li>
                   </ul>
                 </div>

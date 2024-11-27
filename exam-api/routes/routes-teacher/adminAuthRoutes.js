@@ -8,7 +8,7 @@ const viewExams = require("../../management/viewExams");
 const createQuesiton = require("../../management/createQuestion");
 const viewQuestions = require("../../management/viewQuestion");
 const deleteQuestion = require("../../management/deleteQuestion");
-
+const deleteExam = require("../../management/deleteExam");
 
 router.post("/login", adminLogin);
 
@@ -34,5 +34,8 @@ router.post("/viewQuestions", adminVerify, viewQuestions);
 //to delete question as admin
 //with admin verification middleware
 router.post("/deleteQuestion", adminVerify, deleteQuestion);
+
+//to delete exam as admin
+router.post("/deleteExam", adminVerify, deleteExam);
 
 module.exports = router;
