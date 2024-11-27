@@ -12,7 +12,7 @@ import ViewExams from "./pages/management/ViewExams.jsx";
 import CreateQuestion from "./pages/management/CreateQuestion.jsx";
 import ViewQuestion from "./pages/management/ViewQuestion.jsx";
 import { ToastContainer } from "react-toastify";
-
+import CreateExam from "./pages/management/CreateExam.jsx";
 
 const App = () => {
   return (
@@ -30,6 +30,7 @@ const App = () => {
 
         {/* <Route element={<AdminProtectedRoutes />}> */}
         <Route path="/viewExams" element={<ViewExams />} />
+        <Route path="/createExam" element={<CreateExam />} />
         <Route path="/createQuestion/:examName" element={<CreateQuestion />} />
         <Route path="/viewQuestions/:examName" element={<ViewQuestion />} />
         {/* </Route> */}

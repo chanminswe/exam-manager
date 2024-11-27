@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const ViewExams = () => {
@@ -24,33 +24,6 @@ const ViewExams = () => {
     getExam();
   }, []);
 
-  const info = [
-    {
-      createdBy: "Chan Min Swe",
-      examName: "How React and React Native works",
-    },
-    {
-      createdBy: "Chan Min Swe",
-      examName: "Logic Building",
-    },
-    {
-      createdBy: "John Doe",
-      examName: "Java Local questions",
-    },
-    {
-      createdBy: "Chan Min Swe",
-      examName: "How React and React Native works",
-    },
-    {
-      createdBy: "John Doe",
-      examName: "Java Local questions",
-    },
-    {
-      createdBy: "John Doe",
-      examName: "Java Local questions",
-    },
-  ];
-
   function handleView(exam) {
     navigate(`/warning/${encodeURIComponent(exam.examName)}`);
   }
@@ -59,10 +32,19 @@ const ViewExams = () => {
     setOpenDropDown(openDropDown === index ? null : index);
   }
 
+  function handleCreateExam() {
+    navigate("/createExam");
+  }
+
   return (
     <div className="flex flex-col items-center mt-10">
       <h2 className="text-2xl font-bold text-gray-800 mb-6">
-        Every Created Exams
+        <button
+          onClick={handleCreateExam}
+          className="border rounded-lg px-2 py-2 bg-blue-400 text-sm font-semibold hover:scale-90"
+        >
+          Create Exam
+        </button>
       </h2>
 
       <div className="grid grid-cols-3 gap-6 w-full max-w-7xl my-6 ">
