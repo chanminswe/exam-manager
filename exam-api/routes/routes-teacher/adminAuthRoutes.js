@@ -9,6 +9,7 @@ const createQuesiton = require("../../management/createQuestion");
 const viewQuestions = require("../../management/viewQuestion");
 const deleteQuestion = require("../../management/deleteQuestion");
 
+
 router.post("/login", adminLogin);
 
 //no ui for admin register

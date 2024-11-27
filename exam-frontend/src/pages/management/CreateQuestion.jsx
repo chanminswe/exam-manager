@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CreateQuestion = () => {
   const { examName } = useParams();
   const [question, setQuestion] = useState("");
-  const [answers, setAnswers] = useState(["", "", "", ""]);
   const [answerOne, setAnswerOne] = useState("");
   const [answerTwo, setAnswerTwo] = useState("");
   const [answerThree, setAnswerThree] = useState("");
@@ -14,10 +15,12 @@ const CreateQuestion = () => {
 
   async function createQuestion(event) {
     event.preventDefault();
-    try {
-      const batch = [answerOne, answerTwo, answerThree, answerFour];
-      setAnswers(batch);
 
+    try {
+      // Create the answers array directly inside the function, using the individual states.
+      const answers = [answerOne, answerTwo, answerThree, answerFour];
+
+      // Submit the question and answers to the backend.
       const resp = await axios.post(
         "http://localhost:4040/auth/admin/createQuestion",
         {
@@ -28,7 +31,16 @@ const CreateQuestion = () => {
         },
         { withCredentials: true }
       );
-      console.log("Question created successfully:", resp.data);
+
+      toast.success("Question Created Successfully");
+
+      // Reset form fields after successful submission
+      setQuestion("");
+      setAnswerOne("");
+      setAnswerTwo("");
+      setAnswerThree("");
+      setAnswerFour("");
+      setCorrectAnswer("");
     } catch (error) {
       console.log("Error occurred:", error);
     }
@@ -64,24 +76,28 @@ const CreateQuestion = () => {
             Answers :
           </label>
           <input
+            value={answerOne}
             onChange={(event) => setAnswerOne(event.target.value)}
             className="border border-gray-300 rounded-md p-2 mb-2 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none"
-            placeholder={`Option 1`}
+            placeholder="Option 1"
           />
           <input
+            value={answerTwo}
             onChange={(event) => setAnswerTwo(event.target.value)}
             className="border border-gray-300 rounded-md p-2 mb-2 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none"
-            placeholder={`Option 2`}
+            placeholder="Option 2"
           />
           <input
+            value={answerThree}
             onChange={(event) => setAnswerThree(event.target.value)}
             className="border border-gray-300 rounded-md p-2 mb-2 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none"
-            placeholder={`Option 3`}
+            placeholder="Option 3"
           />
           <input
+            value={answerFour}
             onChange={(event) => setAnswerFour(event.target.value)}
             className="border border-gray-300 rounded-md p-2 mb-2 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none"
-            placeholder={`Option 4}`}
+            placeholder="Option 4"
           />
         </div>
 

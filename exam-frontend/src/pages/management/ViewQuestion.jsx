@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 
 const ViewQuestion = () => {
   const [questions, setQuestions] = useState([]);
+  const [changeCount, setChangeCount] = useState(0);
   const { examName } = useParams();
 
   useEffect(() => {
@@ -14,7 +15,6 @@ const ViewQuestion = () => {
           { examName },
           { withCredentials: true }
         );
-        console.log(response.data);
         setQuestions(response.data);
       } catch (error) {
         console.log("Error Occured At Get Questinos", error);
@@ -22,33 +22,20 @@ const ViewQuestion = () => {
     }
 
     getQuestions();
-  }, []);
+  }, [changeCount]);
 
-  // const questions = [
-  //   {
-  //     id: 12323,
-  //     question: "What is React?",
-  //   },
-  //   {
-  //     id: 83492,
-  //     question: "How does useState work in React?",
-  //   },
-  //   {
-  //     id: 57481,
-  //     question: "What is the virtual DOM in React?",
-  //   },
-  //   {
-  //     id: 98342,
-  //     question: "What are React hooks and why are they used?",
-  //   },
-  //   {
-  //     id: 67520,
-  //     question: "Can you explain the concept of props in React?",
-  //   },
-  // ];
-
-  function handleDelete(id) {
-    console.log(id, "deleted");
+  async function handleDelete(question) {
+    try {
+      const del_resp = await axios.post(
+        "http://localhost:4040/auth/admin/deleteQuestion",
+        { question },
+        { withCredentials: true }
+      );
+      setChangeCount(changeCount + 1);
+    } catch (error) {
+      console.log("Error Occured");
+    }
+    console.log(question, "deleted");
   }
 
   return (
@@ -77,7 +64,7 @@ const ViewQuestion = () => {
                 </td>
                 <td className="px-4 py-2 border border-gray-300 text-center">
                   <button
-                    onClick={() => handleDelete(item.id)}
+                    onClick={() => handleDelete(item.question)}
                     aria-label="Delete question"
                     className="text-red-500 hover:text-red-700"
                   >

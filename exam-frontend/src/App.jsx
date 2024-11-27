@@ -11,6 +11,8 @@ import Results from "./pages/students/Results.jsx";
 import ViewExams from "./pages/management/ViewExams.jsx";
 import CreateQuestion from "./pages/management/CreateQuestion.jsx";
 import ViewQuestion from "./pages/management/ViewQuestion.jsx";
+import { ToastContainer } from "react-toastify";
+
 
 const App = () => {
   return (
@@ -18,6 +20,7 @@ const App = () => {
       {/* Admin context provider  */}
 
       <Header />
+      <ToastContainer />
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<Login />} />
