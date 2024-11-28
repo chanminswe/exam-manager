@@ -53,42 +53,50 @@ const ExamTest = () => {
       correctAnswer: "function myFunction()",
     },
   ];
-  return (
-    <div className="flex justify-center w-full bg-slate-200 h-[90vh]">
-      <div className="flex justify-between w-[50%] border rounded-lg shadow-lg ">
-        {examData.map((value, index) => (
-          <div className="flex mt-4">
-            {index === loop && (
-              <>
-                <h2 className="text-md font-semibold w-full">
-                  {value.question}
-                </h2>
-                {/* <div className="flex flex-wrap w-full">
-                  {value.answers.map((ans , ans_index) => (
-                    <>
-                    <label>{ans}</label>
-                    </>
-                    
-                  ))}
-                </div> */}
-              </>
-            )}
-          </div>
-        ))}
-        <button onClick={() => setLoop(loop - 1)}>Prev</button>
 
-        <button onClick={() => setLoop(loop + 1)}>Next</button>
-      </div>
-      <br />
-      {examData.map((total, totalIndex) => (
-        <div className=" ">
-          <button onClick={() => setLoop(totalIndex)}>
-            <div className="flex justify-center items-center max-w-10 max-h-10 p-5 border border-black font-semibold bg-teal-600 m-5 hover:scale-110">
-              {totalIndex}
+  let lengthData = examData.length;
+
+  function handleNext() {
+    setLoop((prevLoop) => (prevLoop + 1) % lengthData);
+  }
+
+  function handleBackward() {
+    setLoop((prevLoop) => (prevLoop - 1 + lengthData) % lengthData);
+  }
+
+  return (
+    <div className="flex flex-wrap w-full justify-center mt-10   ">
+      {examData.map((lists, index) => (
+        <div className="w-[60%]" key={index}>
+          {loop === index && (
+            <div className="flex flex-wrap  h-auto p-10 border border-gray-300 shadow-lg rounded-md mb-10">
+              <h1 className="text-center w-full font-semibold text-lg">
+                {lists.question}
+              </h1>
+              {lists.answers.map((ans, ind) => (
+                <div key={ind} className="flex w-full my-5 ">
+                  <input id={ind} type="radio" className="mx-5" />
+                  <p className="text-lg">{ans}</p>
+                </div>
+              ))}
             </div>
-          </button>
+          )}
         </div>
       ))}
+      <div className="flex justify-around w-full mb-10 ">
+        <button
+          onClick={handleBackward}
+          className="border rounded-md px-3  py-2 text-md bg-blue-400 text-gray-900 hover:scale-90"
+        >
+          Prev
+        </button>
+        <button
+          onClick={handleNext}
+          className="border rounded-md px-3  py-2 text-md bg-blue-400 text-gray-900 hover:scale-90"
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };
