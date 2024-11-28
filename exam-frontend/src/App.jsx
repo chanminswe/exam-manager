@@ -13,12 +13,12 @@ import CreateQuestion from "./pages/management/CreateQuestion.jsx";
 import ViewQuestion from "./pages/management/ViewQuestion.jsx";
 import { ToastContainer } from "react-toastify";
 import CreateExam from "./pages/management/CreateExam.jsx";
+import ExamTest from "./pages/students/ExamTest.jsx";
 
 const App = () => {
   return (
     <>
       {/* Admin context provider  */}
-
       <Header />
       <ToastContainer />
       <Routes>
@@ -39,7 +39,7 @@ const App = () => {
 
         <Route path="/exams" element={<Exams />} />
         <Route path="/warning/:examName" element={<Warning />} />
-        <Route path="/exam/:examName" element={<Exam />} />
+        <Route path="/exam/:examName" element={<ExamTest />} />
         <Route path="/results" element={<Results />} />
         {/* For  users who logged in  */}
       </Routes>
