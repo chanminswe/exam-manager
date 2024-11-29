@@ -17,42 +17,42 @@ const ExamTest = () => {
       ],
       correctAnswer: "JavaScript Library",
     },
-    {
-      question: "Which of the following is a JavaScript runtime environment?",
-      answers: ["React", "Node.js", "Angular", "Vue.js"],
-      correctAnswer: "Node.js",
-    },
-    {
-      question: "What does CSS stand for?",
-      answers: [
-        "Cascading Style Sheets",
-        "Creative Style Sheets",
-        "Cascading Simple Sheets",
-        "Common Style Sheets",
-      ],
-      correctAnswer: "Cascading Style Sheets",
-    },
-    {
-      question: "Which tag is used to define a hyperlink in HTML?",
-      answers: ["<a>", "<link>", "<hyperlink>", "<url>"],
-      correctAnswer: "<a>",
-    },
-    {
-      question:
-        "Which method is used to add an item to an array in JavaScript?",
-      answers: ["push()", "add()", "append()", "insert()"],
-      correctAnswer: "push()",
-    },
-    {
-      question: "What is the correct way to declare a function in JavaScript?",
-      answers: [
-        "function myFunction()",
-        "function = myFunction()",
-        "declare function myFunction()",
-        "myFunction() function",
-      ],
-      correctAnswer: "function myFunction()",
-    },
+    // {
+    //   question: "Which of the following is a JavaScript runtime environment?",
+    //   answers: ["React", "Node.js", "Angular", "Vue.js"],
+    //   correctAnswer: "Node.js",
+    // },
+    // {
+    //   question: "What does CSS stand for?",
+    //   answers: [
+    //     "Cascading Style Sheets",
+    //     "Creative Style Sheets",
+    //     "Cascading Simple Sheets",
+    //     "Common Style Sheets",
+    //   ],
+    //   correctAnswer: "Cascading Style Sheets",
+    // },
+    // {
+    //   question: "Which tag is used to define a hyperlink in HTML?",
+    //   answers: ["<a>", "<link>", "<hyperlink>", "<url>"],
+    //   correctAnswer: "<a>",
+    // },
+    // {
+    //   question:
+    //     "Which method is used to add an item to an array in JavaScript?",
+    //   answers: ["push()", "add()", "append()", "insert()"],
+    //   correctAnswer: "push()",
+    // },
+    // {
+    //   question: "What is the correct way to declare a function in JavaScript?",
+    //   answers: [
+    //     "function myFunction()",
+    //     "function = myFunction()",
+    //     "declare function myFunction()",
+    //     "myFunction() function",
+    //   ],
+    //   correctAnswer: "function myFunction()",
+    // },
   ];
 
   const lengthData = examData.length;
@@ -72,17 +72,42 @@ const ExamTest = () => {
     }));
   }
 
+  /*
+  to end the exam and send it to 
+  the backend
+  questions : checked answers
+  */
   function endExam() {
     console.log(results);
-    // Optionally, you can display feedback or submit the exam data
   }
 
+  const isEveryQuestionAnswered =
+    Object.keys(results).length === examData.length;
+
   return (
-    <div className="flex flex-wrap w-full justify-center mt-10">
+    <div className="flex flex-wrap w-full justify-center mt-5">
+      <div className="flex items-center justify-between w-full">
+        <div className="flex justify-center items-center  w-[50%] ">
+          <h2 className="text-lg font-semibold ml-32 my-6 ">
+            Exam Name : {examName}
+          </h2>
+        </div>
+        <div className="flex justify-center items-center  w-[50%] m-5">
+          {isEveryQuestionAnswered && (
+            <button
+              onClick={endExam}
+              className="border rounded-md bg-teal-700  px-2 py-2 hover:scale-90"
+            >
+              End Exam
+            </button>
+          )}
+        </div>
+      </div>
+      <br />
       {examData.map((lists, index) => (
-        <div className="w-[60%]" key={index}>
+        <div className="w-[60%] self-center" key={index}>
           {loop === index && (
-            <div className="flex flex-wrap h-auto p-10 border border-gray-300 shadow-lg rounded-md mb-10">
+            <div className="flex flex-wrap h-auto p-10 border border-gray-300 shadow-lg rounded-md mb-5">
               <h1 className="text-center w-full font-semibold text-lg">
                 {lists.question}
               </h1>
@@ -116,22 +141,21 @@ const ExamTest = () => {
           Next
         </button>
       </div>
-      <div className="flex flex-wrap justify-center w-[50%] border">
-        {examData.map((boxes, box_index) => (
-          <button onClick={() => setLoop(box_index)} key={box_index}>
-            <div className="flex justify-center items-center w-15 h-10 p-5 m-5 border rounded-sm border-black">
-              <p>{box_index + 1}</p>
-            </div>
-          </button>
-        ))}
-      </div>
-      <div className="flex justify-center w-full">
-        <button
-          onClick={endExam}
-          className="border rounded-md bg-teal-700 px-2 py-3 mt-6 hover:scale-90"
-        >
-          End Exam
-        </button>
+      <div className="flex flex-wrap justify-center w-[50%]">
+        {examData.map((boxes, box_index) => {
+          const isAnswered = results[boxes.question] !== undefined;
+          return (
+            <button onClick={() => setLoop(box_index)} key={box_index}>
+              <div
+                className={`flex justify-center items-center w-15 h-10 p-5 mx-5 border rounded-sm border-black
+                ${isAnswered ? "bg-green-300" : "bg-white"}
+                `}
+              >
+                <p>{box_index + 1}</p>
+              </div>
+            </button>
+          );
+        })}
       </div>
     </div>
   );
