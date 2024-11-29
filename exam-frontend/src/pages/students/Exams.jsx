@@ -1,27 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Exams = () => {
   const navigate = useNavigate();
+  const [info , setInfo] = useState([]);
 
-  const info = [
-    {
-      createdBy: "Chan Min Swe",
-      examName: "How React and React Native works",
-    },
-    {
-      createdBy: "Chan Min Swe",
-      examName: "Logic Building",
-    },
-    {
-      createdBy: "John Doe",
-      examName: "Java Local questions",
-    },
-    {
-      createdBy: "Chan Min Swe",
-      examName: "How React and React Native works",
-    },
-  ];
+  useEffect(() => {
+    async function getExam() {
+      try {
+        const res = await axios.get(
+          "http://localhost:4040/auth/user/getExams",
+          { withCredentials: true }
+        );
+
+        console.log(res.data.getExams);
+        setInfo(res.data.getExams);
+      } catch (error) {
+        console.log("Error Occured ", error);
+      }
+    }
+
+    getExam();
+  }, []);
+
+  // const info = [
+  //   {
+  //     createdBy: "Chan Min Swe",
+  //     examName: "How React and React Native works",
+  //   },
+  //   {
+  //     createdBy: "Chan Min Swe",
+  //     examName: "Logic Building",
+  //   },
+  //   {
+  //     createdBy: "John Doe",
+  //     examName: "Java Local questions",
+  //   },
+  //   {
+  //     createdBy: "Chan Min Swe",
+  //     examName: "How React and React Native works",
+  //   },
+  // ];
 
   function handleView(exam) {
     navigate(`/warning/${encodeURIComponent(exam.examName)}`);

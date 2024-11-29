@@ -1,6 +1,6 @@
 const Exams = require("../models/exams/Exams");
 
-const viewExams = async (req, res) => {
+const view_Exams = async (req, res) => {
   try {
     const getExams = await Exams.find();
 
@@ -23,4 +23,4 @@ const viewExams = async (req, res) => {
   }
 };
 
-module.exports = viewExams;
+module.exports = view_Exams;
