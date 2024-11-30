@@ -4,7 +4,7 @@ import axios from "axios";
 
 const Exams = () => {
   const navigate = useNavigate();
-  const [info , setInfo] = useState([]);
+  const [info, setInfo] = useState([]);
 
   useEffect(() => {
     async function getExam() {
@@ -24,27 +24,8 @@ const Exams = () => {
     getExam();
   }, []);
 
-  // const info = [
-  //   {
-  //     createdBy: "Chan Min Swe",
-  //     examName: "How React and React Native works",
-  //   },
-  //   {
-  //     createdBy: "Chan Min Swe",
-  //     examName: "Logic Building",
-  //   },
-  //   {
-  //     createdBy: "John Doe",
-  //     examName: "Java Local questions",
-  //   },
-  //   {
-  //     createdBy: "Chan Min Swe",
-  //     examName: "How React and React Native works",
-  //   },
-  // ];
-
-  function handleView(exam) {
-    navigate(`/warning/${encodeURIComponent(exam.examName)}`);
+  function handleView(examName, id) {
+    navigate(`/warning/${encodeURIComponent(examName)}/${id}`);
   }
 
   return (
@@ -64,7 +45,7 @@ const Exams = () => {
             <div className="flex items-center justify-between">
               <p className="text-sm text-gray-600">{value.createdBy}</p>
               <button
-                onClick={() => handleView(value)}
+                onClick={() => handleView(value.examName, value._id)}
                 className="border border-teal-400 rounded-md bg-teal-500 text-sm py-2 px-3 font-semibold transform transition-transform duration-200 hover:scale-105"
               >
                 Answer

@@ -26,7 +26,6 @@ const Exam = () => {
     getQuestion();
   }, []);
 
-
   const lengthData = examData.length;
 
   function handleNext() {
@@ -49,7 +48,12 @@ const Exam = () => {
   the backend
   questions : checked answers
   */
-  function endExam() {
+  async function endExam() {
+    const examResult = await axios.post(
+      "http://localhost:4040/auth/user/results",
+      { results },
+      { withCredentials: true }
+    );
     console.log(results);
   }
 
