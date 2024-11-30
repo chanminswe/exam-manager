@@ -17,6 +17,8 @@ const calculateMarks = async (req, res) => {
     let marks = 0;
     const { examId, studentAnswers } = req.body;
 
+    // console.log(req.body);
+
     if (!examId || !studentAnswers) {
       return res
         .status(400)
@@ -51,35 +53,33 @@ const calculateMarks = async (req, res) => {
 
     //to check if the answers are correct
 
-    const examQuestoins = await Questions.find(getExam.examName);
+    const examQuestions = await Questions.find({ examName: getExam.examName });
 
-    examQuestoins.forEach((question) => {
-      const studentAnswer = studentAnswers[question.question];
-      if (studentAnswer === question.correctAnswer) {
+    // console.log("stuent answers " + studentAnswers);
+
+    examQuestions.forEach((examdata) => {
+      if (examdata.correctAnswer === studentAnswers[examdata.question]) {
         marks += 1;
       }
     });
 
-    // const createResult = await Results.create({
-    //   studentId,
-    //   studentName: getStudent.username,
-    //   examId,
-    //   examName: getExam.examName,
-    //   marks,
-    // });
+    const createResult = await Results.create({
+      studentId,
+      studentName: getStudent.username,
+      examId,
+      examName: getExam.examName,
+      marks,
+    });
 
-    console.log("our mark", marks);
+    // console.log("our mark", marks);
 
-    // if (!createResult) {
-    //   return res
-    //     .status(400)
-    //     .json({ message: "Something went wrong while making result ! " });
-    // }
+    if (!createResult) {
+      return res
+        .status(400)
+        .json({ message: "Something went wrong while making result ! " });
+    }
 
     return res.status(201).json({ message: "Result successfully created ! " });
-    // console.log(examId, studentId);
-
-    return res.status(200).json({ message: "Calculate mark success" });
   } catch (error) {
     console.log("Error Occured at calculate marks !", error);
     return res.status(500).json({ message: "Internal Server Error" });

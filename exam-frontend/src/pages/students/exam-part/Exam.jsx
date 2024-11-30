@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const Exam = () => {
-  const { examName } = useParams();
+  const { examName, id } = useParams();
   const [loop, setLoop] = useState(0);
   const [results, setResults] = useState({});
   const [examData, setExamData] = useState([]);
@@ -51,7 +51,7 @@ const Exam = () => {
   async function endExam() {
     const examResult = await axios.post(
       "http://localhost:4040/auth/user/results",
-      { results },
+      { examId: id, studentAnswers: results },
       { withCredentials: true }
     );
     console.log(results);

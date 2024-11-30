@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const Warning = () => {
-  const { examName } = useParams();
+  const { examName , id } = useParams();
 
   const navigate = useNavigate();
 
@@ -11,7 +11,7 @@ const Warning = () => {
   }
 
   function handleContinue() {
-    navigate(`/exam/${encodeURIComponent(examName)}`);
+    navigate(`/exam/${encodeURIComponent(examName)}/${id}`);
   }
 
   return (
