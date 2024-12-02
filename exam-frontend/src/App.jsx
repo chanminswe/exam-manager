@@ -7,7 +7,7 @@ import AdminLogin from "./pages/auth/AdminLogin";
 import Warning from "./pages/students/Warning.jsx";
 import Exams from "./pages/students/Exams.Jsx";
 import Exam from "./pages/students/exam-part/Exam.jsx";
-import Results from "./pages/students/Results.jsx";
+import Results from "./pages/students/exam-part/Results.jsx";
 import ViewExams from "./pages/management/ViewExams.jsx";
 import CreateQuestion from "./pages/management/CreateQuestion.jsx";
 import ViewQuestion from "./pages/management/ViewQuestion.jsx";
@@ -41,7 +41,7 @@ const App = () => {
         <Route path="/warning/:examName/:id" element={<Warning />} />
 
         <Route path="/exam/:examName/:id" element={<Exam />} />
-        <Route path="/results" element={<Results />} />
+        <Route path="/results/:examName/:studentName/:grade" element={<Results />} />
         {/* For  users who logged in  */}
       </Routes>
     </>

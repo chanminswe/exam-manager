@@ -4,13 +4,13 @@ const Exams = require("../models/exams/Exams");
 const Questions = require("../models/exams/Questions");
 
 /* 
-This page is basically to calcualte marks
-first we will accept the studentUsername / studentId to create in the database;
-And the Also the examName that the Button was clicked is from 
+  This page is basically to calcualte marks
+  first we will accept the studentUsername / studentId to create in the database;
+  And the Also the examName that the Button was clicked is from 
 
-WHEN -
-I am thinking about running this code when the frontend clicked the end exam button
-*/
+  WHEN -
+  I am thinking about running this code when the frontend clicked the end exam button
+  */
 
 const calculateMarks = async (req, res) => {
   try {
@@ -72,14 +72,20 @@ const calculateMarks = async (req, res) => {
     });
 
     // console.log("our mark", marks);
-
     if (!createResult) {
       return res
         .status(400)
         .json({ message: "Something went wrong while making result ! " });
     }
 
-    return res.status(201).json({ message: "Result successfully created ! " });
+    const grade = marks > examQuestions.length / 2 ? "pass" : "fail";
+
+    return res.status(201).json({
+      studentName: getStudent.username,
+      examName: getExam.examName,
+      grade,
+      marks,
+    });
   } catch (error) {
     console.log("Error Occured at calculate marks !", error);
     return res.status(500).json({ message: "Internal Server Error" });

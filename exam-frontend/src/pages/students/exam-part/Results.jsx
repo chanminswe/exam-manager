@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const Results = () => {
+
+  const {examName , studentName , grade} = useParams(); 
   const [resultsLoading, setResultsLoading] = useState(false);
+
+
 
   return (
     <div className="flex justify-center h-[90vh] w-full">
@@ -25,7 +31,7 @@ const Results = () => {
               </div>
               <div className="w-[45%] bg-gray-100 p-3 rounded-lg shadow-md">
                 <p className="font-semibold text-lg">Grade</p>
-                <p className="text-2xl font-bold text-teal-600">Pass</p>
+                <p className="text-2xl font-bold text-teal-600">{grade}</p>
               </div>
             </div>
           </div>

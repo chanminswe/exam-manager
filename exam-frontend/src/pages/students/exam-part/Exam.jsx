@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Exam = () => {
   const { examName, id } = useParams();
   const [loop, setLoop] = useState(0);
   const [results, setResults] = useState({});
   const [examData, setExamData] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getQuestion() {
@@ -54,7 +55,13 @@ const Exam = () => {
       { examId: id, studentAnswers: results },
       { withCredentials: true }
     );
-    console.log(results);
+    console.log(examResult.data);
+    const studentName = examResult.data.studentName;
+    const grade = examResult.data.grade;
+
+    navigate(
+      `/results/${encodeURIComponent(examName)}/${studentName}/${grade}`
+    );
   }
 
   /* To check if all the questions are answered */
