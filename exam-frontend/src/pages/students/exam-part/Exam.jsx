@@ -50,18 +50,25 @@ const Exam = () => {
   questions : checked answers
   */
   async function endExam() {
-    const examResult = await axios.post(
-      "http://localhost:4040/auth/user/results",
-      { examId: id, studentAnswers: results },
-      { withCredentials: true }
-    );
-    console.log(examResult.data);
-    const studentName = examResult.data.studentName;
-    const grade = examResult.data.grade;
+    try {
+      const examResult = await axios.post(
+        "http://localhost:4040/auth/user/results",
+        { examId: id, studentAnswers: results },
+        { withCredentials: true }
+      );
+      console.log(examResult.data);
+      const studentName = examResult.data.studentName;
+      const grade = examResult.data.grade;
+      const marks = examResult.data.marks;
 
-    navigate(
-      `/results/${encodeURIComponent(examName)}/${studentName}/${grade}`
-    );
+      navigate(
+        `/results/${encodeURIComponent(
+          examName
+        )}/${studentName}/${grade}/${marks}`
+      );
+    } catch (error) {
+      console.log("Error Occured at end Exam", error);
+    }
   }
 
   /* To check if all the questions are answered */

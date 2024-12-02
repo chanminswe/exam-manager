@@ -41,7 +41,7 @@ const App = () => {
         <Route path="/warning/:examName/:id" element={<Warning />} />
 
         <Route path="/exam/:examName/:id" element={<Exam />} />
-        <Route path="/results/:examName/:studentName/:grade" element={<Results />} />
+        <Route path="/results/:examName/:studentName/:grade/:marks" element={<Results />} />
         {/* For  users who logged in  */}
       </Routes>
     </>

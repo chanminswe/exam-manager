@@ -1,44 +1,36 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import { useParams } from "react-router-dom";
 
 const Results = () => {
-
-  const {examName , studentName , grade} = useParams(); 
-  const [resultsLoading, setResultsLoading] = useState(false);
-
-
+  const { examName, studentName, grade, marks } = useParams();
+  const [resultsLoading, setResultsLoading] = React.useState(false);
 
   return (
-    <div className="flex justify-center h-[90vh] w-full">
+    <div className="flex justify-center items-center min-h-[90vh] bg-gray-50">
       {resultsLoading ? (
-        <div>Loading</div>
+        <div className="text-lg font-medium text-gray-600">Loading...</div>
       ) : (
-        <div className="flex w-[60%] h-[40vh] border border-gray-200 rounded-md shadow-2xl py-5 mt-20">
-          {/* Left side of the result page*/}
-          <div className="flex flex-col justify-around items-center text-center w-[30%] ">
-            <div className="border w-[80%] h-[70%] border-red-300 m-2"></div>
-            <p className="text-lg font-medium">Chan Min Swe</p>
-          </div>
-
-          {/* Right side of the result page */}
-          <div className="flex flex-wrap justify-center items-center w-[70%] border-l-2 px-10">
-            <h2 className="text-xl font-semibold mb-4">Exam Results</h2>
-            <div className="flex w-full justify-between text-center">
-              <div className="w-[45%] bg-gray-100 p-3 rounded-lg shadow-md">
-                <p className="font-semibold text-lg">Score</p>
-                <p className="text-2xl font-bold text-teal-600">60</p>
-              </div>
-              <div className="w-[45%] bg-gray-100 p-3 rounded-lg shadow-md">
-                <p className="font-semibold text-lg">Grade</p>
-                <p className="text-2xl font-bold text-teal-600">{grade}</p>
-              </div>
-            </div>
+        <div className="flex flex-col w-[90%] max-w-[600px] bg-white border border-gray-300 rounded-lg shadow-xl p-8 space-y-6">
+          <h2 className="text-2xl font-bold text-center text-gray-800">
+            Exam Results
+          </h2>
+          <div className="grid grid-cols-2 gap-6">
+            <ResultCard title="Score" value={marks * 2} />
+            <ResultCard title="Grade" value={grade} />
+            <ResultCard title="Student Name" value={studentName} />
+            <ResultCard title="Exam Name" value={examName} />
           </div>
         </div>
       )}
     </div>
   );
 };
+
+const ResultCard = ({ title, value }) => (
+  <div className="flex flex-col items-center bg-gray-100 p-4 rounded-lg shadow-sm">
+    <p className="text-sm font-medium text-gray-600">{title}</p>
+    <p className="text-xl font-bold text-teal-600">{value}</p>
+  </div>
+);
 
 export default Results;
