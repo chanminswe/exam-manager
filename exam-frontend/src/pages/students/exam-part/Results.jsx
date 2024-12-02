@@ -29,7 +29,13 @@ const Results = () => {
 const ResultCard = ({ title, value }) => (
   <div className="flex flex-col items-center bg-gray-100 p-4 rounded-lg shadow-sm">
     <p className="text-sm font-medium text-gray-600">{title}</p>
-    <p className="text-xl font-bold text-teal-600">{value}</p>
+    <p
+      className={`text-xl font-bold  ${
+        value === "fail" ? "text-red-600" : "text-teal-600"
+      }  `}
+    >
+      {value}
+    </p>
   </div>
 );
 

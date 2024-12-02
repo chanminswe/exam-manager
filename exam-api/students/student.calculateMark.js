@@ -78,14 +78,16 @@ const calculateMarks = async (req, res) => {
         .json({ message: "Something went wrong while making result ! " });
     }
 
-    const grade = marks > examQuestions.length / 2 ? "pass" : "fail";
+    const grade = marks > examQuestions.length / 2  ? "pass" : "fail";
 
-    return res.status(201).json({
-      studentName: getStudent.username,
-      examName: getExam.examName,
-      grade,
-      marks,
-    });
+    return res
+      .status(201)
+      .json({
+        studentName: getStudent.username,
+        examName: getExam.examName,
+        grade,
+        marks
+      });
   } catch (error) {
     console.log("Error Occured at calculate marks !", error);
     return res.status(500).json({ message: "Internal Server Error" });
