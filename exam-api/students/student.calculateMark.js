@@ -34,7 +34,7 @@ const calculateMarks = async (req, res) => {
         .json({ message: "Student Id unavailable / or token expired!" });
     }
 
-    // to get student Name :)
+    // to get student Name
     const getStudent = await Students.findById(studentId);
 
     if (!getStudent) {
@@ -50,9 +50,19 @@ const calculateMarks = async (req, res) => {
         .status(400)
         .json({ message: "Something went wrong fetching Exam Id !" });
     }
+    const existingResult = await Results.findOne({
+      studentId,
+      examId,
+      answeredOnce: true, // Check for already submitted exams
+    });
+
+    if (existingResult) {
+      return res
+        .status(400)
+        .json({ message: "You have already taken this exam!" });
+    }
 
     //to check if the answers are correct
-
     const examQuestions = await Questions.find({ examName: getExam.examName });
 
     // console.log("stuent answers " + studentAnswers);
@@ -69,6 +79,7 @@ const calculateMarks = async (req, res) => {
       examId,
       examName: getExam.examName,
       marks,
+      answeredOnce: true,
     });
 
     // console.log("our mark", marks);
@@ -78,16 +89,14 @@ const calculateMarks = async (req, res) => {
         .json({ message: "Something went wrong while making result ! " });
     }
 
-    const grade = marks > examQuestions.length / 2  ? "pass" : "fail";
+    const grade = marks > examQuestions.length / 2 ? "pass" : "fail";
 
-    return res
-      .status(201)
-      .json({
-        studentName: getStudent.username,
-        examName: getExam.examName,
-        grade,
-        marks
-      });
+    return res.status(201).json({
+      studentName: getStudent.username,
+      examName: getExam.examName,
+      grade,
+      marks,
+    });
   } catch (error) {
     console.log("Error Occured at calculate marks !", error);
     return res.status(500).json({ message: "Internal Server Error" });

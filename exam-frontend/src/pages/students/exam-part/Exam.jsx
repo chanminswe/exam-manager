@@ -64,7 +64,8 @@ const Exam = () => {
       navigate(
         `/results/${encodeURIComponent(
           examName
-        )}/${studentName}/${grade}/${marks}`
+        )}/${studentName}/${grade}/${marks}`,
+        { replace: true }
       );
     } catch (error) {
       console.log("Error Occured at end Exam", error);

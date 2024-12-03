@@ -6,7 +6,7 @@ const Results = () => {
   const [resultsLoading, setResultsLoading] = React.useState(false);
 
   return (
-    <div className="flex justify-center items-center min-h-[90vh] bg-gray-50">
+    <div className="flex flex-col justify-center items-center min-h-[90vh] bg-gray-50">
       {resultsLoading ? (
         <div className="text-lg font-medium text-gray-600">Loading...</div>
       ) : (
@@ -22,6 +22,9 @@ const Results = () => {
           </div>
         </div>
       )}
+      <div className="w-full text-center mt-10">
+        <p>Please wait for the teacher to confirm the result</p>
+      </div>
     </div>
   );
 };

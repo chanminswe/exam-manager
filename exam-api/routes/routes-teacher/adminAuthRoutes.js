@@ -9,6 +9,7 @@ const createQuesiton = require("../../management/createQuestion");
 const viewQuestions = require("../../management/viewQuestion");
 const deleteQuestion = require("../../management/deleteQuestion");
 const deleteExam = require("../../management/deleteExam");
+const viewResults = require("../../management/viewResults");
 
 router.post("/login", adminLogin);
 
@@ -37,5 +38,8 @@ router.post("/deleteQuestion", adminVerify, deleteQuestion);
 
 //to delete exam as admin
 router.post("/deleteExam", adminVerify, deleteExam);
+
+//to view exam results by students
+router.post("/viewResults", adminVerify, viewResults);
 
 module.exports = router;

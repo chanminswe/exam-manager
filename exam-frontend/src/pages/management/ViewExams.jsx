@@ -51,6 +51,12 @@ const ViewExams = () => {
     setOpenDropDown((prev) => (prev === index ? null : index));
   }
 
+  function handleResults(examName) {
+    navigate(`/viewResults/${encodeURIComponent(examName)}`);
+  }
+
+  
+
   return (
     <div className="flex flex-col items-center mt-10">
       <h2 className="text-2xl font-bold text-gray-800 mb-6">
@@ -122,6 +128,12 @@ const ViewExams = () => {
                         onClick={() => handleDelete(value.examName)}
                       >
                         Delete Exam
+                      </li>
+                      <li
+                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                        onClick={() => handleResults(value.examName)}
+                      >
+                        ViewExamResults
                       </li>
                       <li
                         className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
