@@ -1,5 +1,6 @@
 const Exams = require("../models/exams/Exams");
 const Questions = require("../models/exams/Questions");
+const Results = require("../models/exams/Results");
 
 const deleteExam = async (req, res) => {
   try {
@@ -25,6 +26,14 @@ const deleteExam = async (req, res) => {
       return res
         .status(400)
         .json({ message: "Error Occured while deleting related questions" });
+    }
+
+    const deleteRelatedResults = await Results.find({ examName });
+
+    if (!deleteRelatedResults) {
+      return res
+        .status(400)
+        .json({ message: "Error Occured while deleting related results" });
     }
 
     return res.status(200).json({ message: "Exam deleted Sucessfully!" });
