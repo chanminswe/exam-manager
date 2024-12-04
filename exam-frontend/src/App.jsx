@@ -23,10 +23,11 @@ const App = () => {
       <Header />
       <ToastContainer />
       <Routes>
+        
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<Login />} />
 
-        {/* For admins need to add auth later */}
+        {/* For admin login */}
         <Route path="/admin" element={<AdminLogin />} />
 
         {/* <Route element={<AdminProtectedRoutes />}> */}
@@ -37,21 +38,12 @@ const App = () => {
         <Route path="/manageUsers" element={<ManageUser />} />
 
         {/* For users who logged in */}
-
         <Route path="/exams" element={<Exams />} />
         <Route path="/warning/:examName/:id" element={<Warning />} />
-
         <Route path="/exam/:examName/:id" element={<Exam />} />
-        <Route
-          path="/examReview/:studentName/:examName"
-          element={<ExamReview />}
-        />
-        <Route
-          path="/results/:examName/:studentName/:grade/:marks"
-          element={<Results />}
-        />
+        <Route path="/examReview/:studentName/:examName" element={<ExamReview />}/>
+        <Route path="/results/:examName/:studentName/:grade/:marks" element={<Results />}/>
 
-        {/* For  users who logged in  */}
       </Routes>
     </>
   );

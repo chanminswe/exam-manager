@@ -17,7 +17,6 @@ const Exam = () => {
           { examName },
           { withCredentials: true }
         );
-        console.log(getq);
         setExamData(getq.data);
       } catch (error) {
         console.log(error);
