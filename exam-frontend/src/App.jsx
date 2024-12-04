@@ -15,6 +15,7 @@ import { ToastContainer } from "react-toastify";
 import CreateExam from "./pages/management/CreateExam.jsx";
 import ExamTest from "./pages/students/ExamTest.jsx";
 import ViewExamResults from "./pages/management/ViewExamResults.jsx";
+import ManageUser from "./pages/management/ManageUser.jsx";
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
         <Route path="/createQuestion/:examName" element={<CreateQuestion />} />
         <Route path="/viewQuestions/:examName" element={<ViewQuestion />} />
         <Route path="/viewResults/:examName" element={<ViewExamResults />} />
+        <Route path="/manageUsers" element={<ManageUser />} />
 
         {/* </Route> */}
         {/* For admins need to add auth later */}
