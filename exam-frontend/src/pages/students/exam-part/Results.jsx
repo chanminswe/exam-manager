@@ -36,9 +36,6 @@ const Results = () => {
           </div>
         </div>
       )}
-      <div className="w-full text-center mt-10">
-        <p>Please wait for the teacher to confirm the result</p>
-      </div>
       <div className="flex flex-wrap justify-center my-10">
         <div className="w-full mb-3">
           <p className="text-center">Click to review your mistakes !</p>

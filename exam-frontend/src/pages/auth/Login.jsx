@@ -18,12 +18,12 @@ const Login = () => {
         { withCredentials: true }
       )
       .then((response) => {
-        toast.success("Login Successful")
+        toast.success("Login Successful");
         navigate("/exams");
         console.log(response);
       })
       .catch((error) => {
-        toast.error("Your password or username is incorrect")
+        toast.error("Your password or username is incorrect");
         console.log("Error Occurred:", error.message);
       });
   }
@@ -33,11 +33,9 @@ const Login = () => {
       <div className="flex w-[90%] max-w-[60%]  mx-auto bg-white shadow-2xl rounded-lg overflow-hidden">
         {/* Left Section */}
         <div className="hidden md:flex flex-col justify-center items-center w-1/2 bg-gray-200 p-6">
-          <h3 className="text-4xl font-bold text-blue-700 mb-4">
-            Welcome Back!
-          </h3>
+          <h3 className="text-4xl font-bold  mb-4">Welcome Back!</h3>
           <p className="text-gray-600 text-lg text-center">
-            Log in to access your exams and continue your progress.
+            <span className="text-red-600 font-semibold">Log in </span> to access your exams and continue your progress.
           </p>
         </div>
 
