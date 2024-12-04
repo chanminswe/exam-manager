@@ -12,10 +12,9 @@ import ViewExams from "./pages/management/ViewExams.jsx";
 import CreateQuestion from "./pages/management/CreateQuestion.jsx";
 import ViewQuestion from "./pages/management/ViewQuestion.jsx";
 import { ToastContainer } from "react-toastify";
-import CreateExam from "./pages/management/CreateExam.jsx";
-import ExamTest from "./pages/students/ExamTest.jsx";
 import ViewExamResults from "./pages/management/ViewExamResults.jsx";
 import ManageUser from "./pages/management/ManageUser.jsx";
+import ExamReview from "./pages/students/exam-part/ExamReview.jsx";
 
 const App = () => {
   return (
@@ -37,9 +36,6 @@ const App = () => {
         <Route path="/viewResults/:examName" element={<ViewExamResults />} />
         <Route path="/manageUsers" element={<ManageUser />} />
 
-        {/* </Route> */}
-        {/* For admins need to add auth later */}
-
         {/* For users who logged in */}
 
         <Route path="/exams" element={<Exams />} />
@@ -47,9 +43,14 @@ const App = () => {
 
         <Route path="/exam/:examName/:id" element={<Exam />} />
         <Route
+          path="/examReview/:studentName/:examName"
+          element={<ExamReview />}
+        />
+        <Route
           path="/results/:examName/:studentName/:grade/:marks"
           element={<Results />}
         />
+
         {/* For  users who logged in  */}
       </Routes>
     </>
