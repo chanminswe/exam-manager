@@ -1,35 +1,36 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ManageUser = () => {
   const [questions, setQuestions] = useState([]);
   const [changeCount, setChangeCount] = useState(0);
 
-      useEffect(() => {
-        async function getQuestions() {
-          try {
-            const response = await axios.get(
-              "http://localhost:4040/auth/admin/getUsers",
-              { withCredentials: true }
-            );
-            console.log(response)
-            setQuestions(response.data);
-          } catch (error) {
-            console.log("Error Occured At Get Questinos", error);
-          }
-        }
+  useEffect(() => {
+    async function getQuestions() {
+      try {
+        const response = await axios.get(
+          "http://localhost:4040/auth/admin/getUsers",
+          { withCredentials: true }
+        );
+        console.log(response);
+        setQuestions(response.data);
+      } catch (error) {
+        console.log("Error Occured At Get Questinos", error);
+      }
+    }
 
-        getQuestions();
-      }, [changeCount]);
+    getQuestions();
+  }, [changeCount]);
 
   async function handleDelete(studentId) {
     try {
       const del_resp = await axios.post(
-        "http://localhost:4040/auth/admin/deleteUser",
+        "http://localhost:4040/auth/admin/deleteUsers",
         { studentId },
         { withCredentials: true }
       );
+      toast.success(" User Deleted Successfully ! ");
       setChangeCount(changeCount + 1);
     } catch (error) {
       console.log("Error Occured");
@@ -46,8 +47,8 @@ const ManageUser = () => {
         <table className="table-auto w-full border-collapse border border-gray-200">
           <thead className="bg-gray-100">
             <tr>
-              <th className="px-4 py-2 border border-gray-300">Question</th>
-              <th className="px-4 py-2 border border-gray-300">Action</th>
+              <th className="px-4 py-2 border border-gray-300">Username</th>
+              <th className="px-4 py-2 border border-gray-300">Delete User</th>
             </tr>
           </thead>
           <tbody>
@@ -58,7 +59,7 @@ const ManageUser = () => {
                   index % 2 === 0 ? "bg-gray-50" : "bg-white"
                 } hover:bg-gray-100`}
               >
-                <td className="px-4 py-2 border border-gray-300">
+                <td className="px-4 py-2 border border-gray-300 text-center">
                   {item.username}
                 </td>
                 <td className="px-4 py-2 border border-gray-300 text-center">

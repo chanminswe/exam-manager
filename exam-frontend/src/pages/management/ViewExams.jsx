@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import CreateExam from "./CreateExam";
 import { toast } from "react-toastify";
-import ManageUser from "./ManageUser";
 
 const ViewExams = () => {
   const navigate = useNavigate();
@@ -56,28 +55,18 @@ const ViewExams = () => {
     navigate(`/viewResults/${encodeURIComponent(examName)}`);
   }
 
-  function handleManage() {
-    navigate("/manageUsers");
-  }
-
   return (
     <div className="flex flex-col items-center mt-10">
       <h2 className="text-2xl font-bold text-gray-800 mb-6">
         <CreateExam count={setCount} />
       </h2>
-      <button
-        onClick={handleManage}
-        className="border rounded-md bg-blue-400 py-2 px-2 hover:bg-blue-500 hover:scale-90"
-      >
-        Manage User
-      </button>
 
       {exams.length > 0 ? (
-        <div className="grid grid-cols-3 gap-6 w-full max-w-4xl my-6">
+        <div className="grid grid-cols-3 gap-6 w-full max-w-4xl my-2">
           {exams.map((value, index) => (
             <div
               key={index}
-              className="relative h-36 w-full bg-white border border-gray-200 rounded-lg shadow-lg p-4 my-5 flex flex-col justify-between"
+              className="relative h-32 w-full bg-white border border-gray-200 rounded-lg shadow-lg p-4 my-5 flex flex-col justify-between"
             >
               <p className="text-lg font-semibold text-gray-800">
                 {value.examName}
