@@ -23,6 +23,18 @@ const ViewExamResults = () => {
     getQuestions();
   }, [examName]);
 
+  async function handleRevoke(studentId, examId) {
+    try {
+      const req = await axios.post(
+        "http://localhost:4040/auth/admin/results",
+        { studentId, examId },
+        { withCredentials: true }
+      );
+      console.log(req.data.message);
+    } catch (error) {
+      console.log("Error Occured at frontend send request", error);
+    }
+  }
 
   return (
     <div className="flex justify-center mt-10 w-full h-auto">
@@ -41,6 +53,9 @@ const ViewExamResults = () => {
               </th>
               <th className="px-6 py-3 border border-gray-300 text-left">
                 Marks
+              </th>
+              <th className="px-6 py-3 border border-gray-300 text-left">
+                Grade
               </th>
               <th className="px-6 py-3 border border-gray-300 text-center">
                 Revoke
@@ -64,10 +79,13 @@ const ViewExamResults = () => {
                 <td className="px-6 py-4 border border-gray-300">
                   {item.marks}
                 </td>
+                <td className="px-6 py-4 border border-gray-300">
+                  {item.grade}
+                </td>
 
                 <td className="px-6 py-4 border border-gray-300 text-center">
                   <button
-                    onClick={() => handleDelete(item.question)}
+                    onClick={() => handleRevoke(item.studentId, item.examId)}
                     aria-label="Delete question"
                     className="text-red-500 hover:text-red-700 transition-all duration-200"
                   >
@@ -75,13 +93,13 @@ const ViewExamResults = () => {
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
-                      stroke-width="1.5"
+                      strokeWidth="1.5"
                       stroke="currentColor"
                       className="size-6"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                         d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
                       />
                     </svg>

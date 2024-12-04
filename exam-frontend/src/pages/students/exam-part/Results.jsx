@@ -15,7 +15,7 @@ const Results = () => {
             Exam Results
           </h2>
           <div className="grid grid-cols-2 gap-6">
-            <ResultCard title="Score" value={marks * 2} />
+            <ResultCard title="Score" value={marks} />
             <ResultCard title="Grade" value={grade} />
             <ResultCard title="Student Name" value={studentName} />
             <ResultCard title="Exam Name" value={examName} />

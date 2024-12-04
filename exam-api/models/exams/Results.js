@@ -26,6 +26,9 @@ const ResultSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    grade: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

@@ -73,6 +73,8 @@ const calculateMarks = async (req, res) => {
       }
     });
 
+    const grade = marks > examQuestions.length / 2 ? "pass" : "fail";
+
     const createResult = await Results.create({
       studentId,
       studentName: getStudent.username,
@@ -80,6 +82,7 @@ const calculateMarks = async (req, res) => {
       examName: getExam.examName,
       marks,
       answeredOnce: true,
+      grade,
     });
 
     // console.log("our mark", marks);
@@ -88,8 +91,6 @@ const calculateMarks = async (req, res) => {
         .status(400)
         .json({ message: "Something went wrong while making result ! " });
     }
-
-    const grade = marks > examQuestions.length / 2 ? "pass" : "fail";
 
     return res.status(201).json({
       studentName: getStudent.username,

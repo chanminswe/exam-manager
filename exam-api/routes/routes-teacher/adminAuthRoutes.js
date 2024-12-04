@@ -10,6 +10,7 @@ const viewQuestions = require("../../management/viewQuestion");
 const deleteQuestion = require("../../management/deleteQuestion");
 const deleteExam = require("../../management/deleteExam");
 const viewResults = require("../../management/viewResults");
+const revokeExamResults = require('../../management/revokeExamResults');
 
 router.post("/login", adminLogin);
 
@@ -41,5 +42,8 @@ router.post("/deleteExam", adminVerify, deleteExam);
 
 //to view exam results by students
 router.post("/viewResults", adminVerify, viewResults);
+
+// to revoke exam results
+router.post('/results' , adminVerify , revokeExamResults);
 
 module.exports = router;
