@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -23,12 +24,11 @@ const Register = () => {
         }
       )
       .then((resp) => {
-        alert(`Registered ${username} sucessfully!`);
+        toast.success(`Registered ${username} successfully`);
         navigate("/");
-        console.log(resp);
       })
       .catch((error) => {
-        alert("An Unknown Error Occured Please Try Again Later");
+        toast.error(`Something went wrong while registering`)
         console.log(error);
       });
   }

@@ -28,7 +28,7 @@ const deleteExam = async (req, res) => {
         .json({ message: "Error Occured while deleting related questions" });
     }
 
-    const deleteRelatedResults = await Results.find({ examName });
+    const deleteRelatedResults = await Results.deleteMany({ examName });
 
     if (!deleteRelatedResults) {
       return res

@@ -20,27 +20,33 @@ const CreateQuestion = () => {
       // Create the answers array directly inside the function, using the individual states.
       const answers = [answerOne, answerTwo, answerThree, answerFour];
 
-      // Submit the question and answers to the backend.
-      const resp = await axios.post(
-        "http://localhost:4040/auth/admin/createQuestion",
-        {
-          examName,
-          question,
-          answers,
-          correctAnswer,
-        },
-        { withCredentials: true }
-      );
+      if (answers.includes(correctAnswer)) {
+        // Submit the question and answers to the backend.
+        await axios.post(
+          "http://localhost:4040/auth/admin/createQuestion",
+          {
+            examName,
+            question,
+            answers,
+            correctAnswer,
+          },
+          { withCredentials: true }
+        );
 
-      toast.success("Question Created Successfully");
+        toast.success("Question Created Successfully");
 
-      // Reset form fields after successful submission
-      setQuestion("");
-      setAnswerOne("");
-      setAnswerTwo("");
-      setAnswerThree("");
-      setAnswerFour("");
-      setCorrectAnswer("");
+        // Reset form fields after successful submission
+        setQuestion("");
+        setAnswerOne("");
+        setAnswerTwo("");
+        setAnswerThree("");
+        setAnswerFour("");
+        setCorrectAnswer("");
+      } else {
+        toast.warning(
+          "Your answer have to match one of the Option or avoid duplicated answers"
+        );
+      }
     } catch (error) {
       console.log("Error occurred:", error);
     }

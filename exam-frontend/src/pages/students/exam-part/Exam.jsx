@@ -72,8 +72,7 @@ const Exam = () => {
   }
 
   /* To check if all the questions are answered */
-  const isEveryQuestionAnswered =
-    Object.keys(results).length === examData.length;
+  const isEveryQuestionAnswered = Object.keys(results).length === examData.length;
 
   return (
     <div className="flex flex-wrap w-full justify-center mt-5">

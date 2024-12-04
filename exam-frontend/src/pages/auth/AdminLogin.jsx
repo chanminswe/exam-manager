@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { AdminContext } from "../../context/AdminContextProvider";
+import { toast } from "react-toastify";
 
 const AdminLogin = () => {
   const [adminUsername, setAdminUsername] = useState(null);
@@ -16,12 +16,11 @@ const AdminLogin = () => {
         { withCredentials: true }
       )
       .then((res) => {
-        alert(res.data.message);
-        console.log(res.data.message);
+        toast.success(res.data.message);
         navigate("/viewExams");
       })
       .catch((error) => {
-        alert("Something went wrong");
+        toast.error("Wrong Credentials")
         console.log("Error Occured ", error.message);
       });
   }

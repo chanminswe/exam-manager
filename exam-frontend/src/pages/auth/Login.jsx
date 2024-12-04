@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -17,11 +18,12 @@ const Login = () => {
         { withCredentials: true }
       )
       .then((response) => {
-        alert("Logged In Successfully!");
+        toast.success("Login Successful")
         navigate("/exams");
         console.log(response);
       })
       .catch((error) => {
+        toast.error("Your password or username is incorrect")
         console.log("Error Occurred:", error.message);
       });
   }
