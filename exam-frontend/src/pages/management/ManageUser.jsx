@@ -5,44 +5,43 @@ import { useParams } from "react-router-dom";
 const ManageUser = () => {
   const [questions, setQuestions] = useState([]);
   const [changeCount, setChangeCount] = useState(0);
-  const { examName } = useParams();
 
-//   useEffect(() => {
-//     async function getQuestions() {
-//       try {
-//         const response = await axios.post(
-//           "http://localhost:4040/auth/admin/getUsers",
-//           { examName },
-//           { withCredentials: true }
-//         );
-//         setQuestions(response.data);
-//       } catch (error) {
-//         console.log("Error Occured At Get Questinos", error);
-//       }
-//     }
+      useEffect(() => {
+        async function getQuestions() {
+          try {
+            const response = await axios.get(
+              "http://localhost:4040/auth/admin/getUsers",
+              { withCredentials: true }
+            );
+            console.log(response)
+            setQuestions(response.data);
+          } catch (error) {
+            console.log("Error Occured At Get Questinos", error);
+          }
+        }
 
-//     getQuestions();
-//   }, [changeCount]);
+        getQuestions();
+      }, [changeCount]);
 
-  async function handleDelete(question) {
+  async function handleDelete(studentId) {
     try {
       const del_resp = await axios.post(
         "http://localhost:4040/auth/admin/deleteUser",
-        { question },
+        { studentId },
         { withCredentials: true }
       );
       setChangeCount(changeCount + 1);
     } catch (error) {
       console.log("Error Occured");
     }
-    console.log(question, "deleted");
+    console.log(studentId, "deleted");
   }
 
   return (
     <div className="flex justify-center mt-10 w-full h-auto">
       <div className="w-3/4 border shadow-md rounded-lg">
         <h2 className="text-2xl font-bold text-center my-4">
-          Questions for {examName}
+          Students Username
         </h2>
         <table className="table-auto w-full border-collapse border border-gray-200">
           <thead className="bg-gray-100">
@@ -60,11 +59,11 @@ const ManageUser = () => {
                 } hover:bg-gray-100`}
               >
                 <td className="px-4 py-2 border border-gray-300">
-                  {item.question}
+                  {item.username}
                 </td>
                 <td className="px-4 py-2 border border-gray-300 text-center">
                   <button
-                    onClick={() => handleDelete(item.question)}
+                    onClick={() => handleDelete(item._id)}
                     aria-label="Delete question"
                     className="text-red-500 hover:text-red-700"
                   >
