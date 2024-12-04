@@ -11,8 +11,8 @@ const viewResults = async (req, res) => {
 
     if (getStudentResults.length === 0) {
       return res
-        .status(404)
-        .json({ message: "No results found for the specified exam." });
+        .status(200)
+        .json({ message: "No results found" });
     }
 
     if (!getStudentResults) {

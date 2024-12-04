@@ -14,15 +14,21 @@ const ViewExamResults = () => {
           { examName },
           { withCredentials: true }
         );
-        setResults(response.data.getStudentResults);
-        console.log(response);
+        if (response.data.message === "No results found") {
+          setResults(null);
+        } else {
+          setResults(response.data.getStudentResults);
+        }
       } catch (error) {
         console.log("Error Occured At Get Questions", error);
       }
     }
     getQuestions();
-  }, [examName]);
+  }, []);
 
+  {
+    /* this needs fixing */
+  }
   async function handleRevoke(studentId, examId) {
     try {
       const req = await axios.post(
@@ -62,52 +68,60 @@ const ViewExamResults = () => {
               </th>
             </tr>
           </thead>
-          <tbody>
-            {results.map((item, index) => (
-              <tr
-                key={index}
-                className={`${
-                  index % 2 === 0 ? "bg-gray-50" : "bg-white"
-                } hover:bg-teal-100 transition-colors duration-300`}
-              >
-                <td className="px-6 py-4 border border-gray-300">
-                  {item.studentName}
-                </td>
-                <td className="px-6 py-4 border border-gray-300">
-                  {item.examName}
-                </td>
-                <td className="px-6 py-4 border border-gray-300">
-                  {item.marks}
-                </td>
-                <td className="px-6 py-4 border border-gray-300">
-                  {item.grade}
-                </td>
+          {results === null ? (
+            <tbody className="mt-10">
+              <tr>
+                <td className="text-center">No Results for this exam yet</td>
+              </tr> 
+            </tbody>
+          ) : (
+            <tbody>
+              {results.map((item, index) => (
+                <tr
+                  key={index}
+                  className={`${
+                    index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                  } hover:bg-teal-100 transition-colors duration-300`}
+                >
+                  <td className="px-6 py-4 border border-gray-300">
+                    {item.studentName}
+                  </td>
+                  <td className="px-6 py-4 border border-gray-300">
+                    {item.examName}
+                  </td>
+                  <td className="px-6 py-4 border border-gray-300">
+                    {item.marks}
+                  </td>
+                  <td className="px-6 py-4 border border-gray-300">
+                    {item.grade}
+                  </td>
 
-                <td className="px-6 py-4 border border-gray-300 text-center">
-                  <button
-                    onClick={() => handleRevoke(item.studentId, item.examId)}
-                    aria-label="Delete question"
-                    className="text-red-500 hover:text-red-700 transition-all duration-200"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="size-6"
+                  <td className="px-6 py-4 border border-gray-300 text-center">
+                    <button
+                      onClick={() => handleRevoke(item.studentId, item.examId)}
+                      aria-label="Delete question"
+                      className="text-red-500 hover:text-red-700 transition-all duration-200"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
-                      />
-                    </svg>
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        className="size-6"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
+                        />
+                      </svg>
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          )}
         </table>
       </div>
     </div>
