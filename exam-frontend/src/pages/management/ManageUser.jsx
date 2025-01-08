@@ -25,7 +25,7 @@ const ManageUser = () => {
 
   async function handleDelete(studentId) {
     try {
-      const del_resp = await axios.post(
+      await axios.post(
         "http://localhost:4040/auth/admin/deleteUsers",
         { studentId },
         { withCredentials: true }

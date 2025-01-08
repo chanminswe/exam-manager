@@ -38,14 +38,3 @@ A full-stack web application designed for schools and institutions to manage exa
 - **MongoDB**: For database storage and relationships.
 
 ---
-
-## Installation & Setup
-
-### Prerequisites
-- [Node.js](https://nodejs.org/) installed.
-- [MongoDB](https://www.mongodb.com/) set up locally or using a cloud service like MongoDB Atlas.
-
-### Backend Setup
-1. Navigate to the backend directory:
-   ```bash
-   cd backend

@@ -1,14 +1,9 @@
-import React, { createContext, useState } from "react";
+import React from 'react'
 
-export const AdminContext = createContext();
-
-const AdminContextProvider = ({ children }) => {
-  const [adminUsername, setAdminUsername] = useState(null);
+function AdminContextProvider() {
   return (
-    <AdminContext.Provider value={{adminUsername, setAdminUsername}}>
-      {children}
-    </AdminContext.Provider>
-  );
-};
+    <div>AdminContextProvider</div>
+  )
+}
 
-export default AdminContextProvider;
+export default AdminContextProvider

@@ -31,7 +31,9 @@ const createExams = async (req, res) => {
       });
     }
 
-    return res.status(201).json({ message: "Successfully created Exam" });
+    return res
+      .status(201)
+      .json({ message: "Successfully created Exam", admin: req.user });
   } catch (error) {
     console.log("Error Occured at createExams ", error.message);
     return res.status(500).json({ message: "Internal Server Error" });
